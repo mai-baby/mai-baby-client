@@ -9,16 +9,27 @@ function NavBar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <nav>
-      <Navbar className="px-5" bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand>
+    <Navbar
+      className="px-5"
+      bg="dark"
+      variant="dark"
+      sticky="top"
+      expand="md"
+      collapseOnSelect
+    >
+      <Navbar.Brand>
+        <NavLink to="/">
           <img
             src="http://images6.fanpop.com/image/photos/41500000/adorable-puppies-cute-puppies-41538772-1920-1080.jpg"
             alt="brand logo"
             style={{ width: "40px" }}
           />
           Mai Baby
-        </Navbar.Brand>
+        </NavLink>
+      </Navbar.Brand>
+
+      <Navbar.Toggle />
+      <Navbar.Collapse>
         <Nav className="ms-auto">
           <Nav.Link>
             <NavLink to="/">Home</NavLink>
@@ -48,11 +59,12 @@ function NavBar() {
                 <button onClick={logOutUser}>Logout</button>
                 <span>{user && user.name}</span>
               </NavDropdown.Item>
+              <NavDropdown.Divider />
             </NavDropdown>
           )}
         </Nav>
-      </Navbar>
-    </nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 
