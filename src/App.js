@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ProductListPage from "./pages/ProductListPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import EditProductPage from "./pages/EditProductPage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+// import IsPrivate from "./components/IsPrivate";
+// import IsAnon from "./components/IsAnon";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductListPage />} />
+        <Route path="/products/:productId" element={<ProductDetailsPage />} />
+        <Route path="/products/edit/:productId" element={<EditProductPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
     </div>
   );
 }
