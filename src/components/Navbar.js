@@ -31,36 +31,33 @@ function NavBar() {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto">
-          <Nav.Link>
+          <Nav.Link eventKey="1">
             <NavLink to="/">Home</NavLink>
           </Nav.Link>
-          <Nav.Link>
+          <Nav.Link eventKey="2">
             <NavLink to="/products">Products</NavLink>
           </Nav.Link>
-          <Nav.Link>
+          <Nav.Link eventKey="3">
             {/* UPDATE: Add Shopping Cart or Orders!! */}
             <NavLink to="/order">My Orders</NavLink>
           </Nav.Link>
 
           {!isLoggedIn && (
             <>
-              <Nav.Link>
+              <Nav.Link eventKey="4">
                 <NavLink to="/register">Sign Up</NavLink>
               </Nav.Link>
-              <Nav.Link>
+              <Nav.Link eventKey="5">
                 <NavLink to="/login">Login</NavLink>
               </Nav.Link>
             </>
           )}
 
           {isLoggedIn && (
-            <NavDropdown>
-              <NavDropdown.Item>
-                <button onClick={logOutUser}>Logout</button>
-                <span>{user && user.name}</span>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-            </NavDropdown>
+            <Nav.Link eventKey="6">
+              <button onClick={logOutUser}>Logout</button>
+              <span>{user && user.name}</span>
+            </Nav.Link>
           )}
         </Nav>
       </Navbar.Collapse>

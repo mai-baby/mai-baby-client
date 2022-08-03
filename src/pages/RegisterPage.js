@@ -7,25 +7,25 @@ import axios from "axios";
 function RegisterPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [user_name, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleUsername = (e) => setUsername(e.target.value);
 
-  const handleSignupSubmit = (e) => {
+  const handleRegisterSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, user_name };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
     // If the request resolves with an error, set the error message in the state
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/signup`, requestBody)
+      .post(`${process.env.REACT_APP_API_URL}/api/register`, requestBody)
       .then((response) => {
         navigate("/login");
       })
@@ -37,9 +37,9 @@ function RegisterPage(props) {
 
   return (
     <div className="RegisterPage">
-      <h1>Sign Up</h1>
+      <h1>Register</h1>
 
-      <form onSubmit={handleSignupSubmit}>
+      <form onSubmit={handleRegisterSubmit}>
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />
 
@@ -52,9 +52,14 @@ function RegisterPage(props) {
         />
 
         <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <input
+          type="text"
+          name="user_name"
+          value={user_name}
+          onChange={handleUsername}
+        />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit">Register</button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
