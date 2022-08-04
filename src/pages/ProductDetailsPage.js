@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+
 import { Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,6 +9,7 @@ function ProductDetailsPage(props) {
   const [product, setProduct] = useState(null);
 
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   const getProduct = () => {
     // Get the token from the localStorage
@@ -27,6 +29,17 @@ function ProductDetailsPage(props) {
     getProduct();
   }, []);
 
+  const deleteProduct = (productId) => {
+    axios
+      .delete(process.env.REACT_APP_API_URL + "/api/products/" + productId)
+      .then(() => {
+        navigate(`/products`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <div className="ProductDetails">
       {product && (
@@ -43,6 +56,13 @@ function ProductDetailsPage(props) {
       <Link to="/products">
         <button>Back to products</button>
       </Link>
+      <button
+        onClick={() => {
+          deleteProduct(productId);
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 }
