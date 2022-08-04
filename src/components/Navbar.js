@@ -19,11 +19,7 @@ function NavBar() {
     >
       <Navbar.Brand>
         <NavLink to="/">
-          <img
-            src="http://images6.fanpop.com/image/photos/41500000/adorable-puppies-cute-puppies-41538772-1920-1080.jpg"
-            alt="brand logo"
-            style={{ width: "40px" }}
-          />
+          {/* <img src="/logo512.png" alt="brand logo" style={{ width: "40px" }} /> */}
           Mai Baby
         </NavLink>
       </Navbar.Brand>

@@ -29,6 +29,23 @@ function ControlledCarousel(props) {
         className="px-4"
         variant="dark"
       >
+        <Carousel.Item>
+          <Link className="text-center" to={`/products/`}>
+            <Image
+              src="https://ae01.alicdn.com/kf/Hfe75cc0eeb274874b57f72e4577528dcm/Kids-Love-No-23-Basketball-Set-kits-Girls-Basketball-jerseys-boys-basketball-short-sleeve-shirts-shorts.jpg_Q90.jpg_.webp"
+              alt="Kid's Collection"
+              className="d-block mx-auto"
+              style={{ width: "100vw", maxWidth: "500px" }}
+              fluid
+            />
+            <div className="carousel-bg">
+              <Carousel.Caption>
+                <h3>Discover the whole Collection!</h3>
+                <p>Prices starting from 10€</p>
+              </Carousel.Caption>
+            </div>
+          </Link>
+        </Carousel.Item>
         {props.products.map((product) => {
           return (
             <Carousel.Item key={product._id}>
@@ -36,13 +53,16 @@ function ControlledCarousel(props) {
                 <Image
                   src={product.imageURL}
                   alt={product.title}
-                  className="d-block w-100"
+                  className="d-block mx-auto"
+                  style={{ width: "100vw", maxWidth: "500px" }}
                   fluid
                 />
-                <Carousel.Caption>
-                  <h3> {product.title}</h3>
-                  <p>{product.price}€</p>
-                </Carousel.Caption>
+                <div className="carousel-bg">
+                  <Carousel.Caption>
+                    <h3> {product.title}</h3>
+                    <p>{product.price}€</p>
+                  </Carousel.Caption>
+                </div>
               </Link>
             </Carousel.Item>
           );
