@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; //  <== IMPORT
+import { useParams, useNavigate } from "react-router-dom";
+import { Row, Col, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function EditProductPage(props) {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [short_desc, setShortDesc] = useState("");
+  const [price, setPrice] = useState(0);
+  const [brand, setBrand] = useState("");
+  const [imageURL, setImageURL] = useState("");
 
-  const { productId } = useParams(); //  // Get the URL parameter `:productId`
+  const { productId } = useParams();
   const navigate = useNavigate();
-
-  // This effect will run after the initial render and each time
-  // the product id coming from URL parameter `productId` changes
 
   useEffect(() => {
     // Get the token from the localStorage
@@ -20,13 +22,12 @@ function EditProductPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        /* 
-                  We update the state with the product data coming from the response.
-                  This way we set inputs to show the actual title and description of the product
-                */
-        const oneProduct = response.data;
-        setTitle(oneProduct.title);
-        setDescription(oneProduct.description);
+        const foundProduct = response.data;
+        setTitle(foundProduct.title);
+        setShortDesc(foundProduct.short_desc);
+        setPrice(foundProduct.price);
+        setBrand(foundProduct.brand);
+        setImageURL(foundProduct.imageURL);
       })
       .catch((error) => console.log(error));
   }, [productId]);
@@ -34,7 +35,7 @@ function EditProductPage(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the body of the PUT request
-    const requestBody = { title, description };
+    const requestBody = { title, short_desc, price, brand, imageURL };
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -56,27 +57,71 @@ function EditProductPage(props) {
   };
 
   return (
-    <div className="EditProductPage">
-      <h3>Edit the Product</h3>
+    <div className="EditProductPage m-4">
+      <h3 className="text-center">Edit the Product</h3>
+      <Form onSubmit={handleFormSubmit}>
+        <Row>
+          <Form.Group controlId="formTitle">
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {/* <Form.Text>Don't share your email!</Form.Text> */}
+          </Form.Group>
 
-      <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+          <Form.Group controlId="formPassword">
+            <Form.Label>Short Description</Form.Label>
+            <Form.Control
+              type="text"
+              name="short_desc"
+              value={short_desc}
+              onChange={(e) => setShortDesc(e.target.value)}
+            />
+            {/* <Form.Text>Don't share your password!</Form.Text> */}
+          </Form.Group>
 
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          <Form.Group controlId="formPrice">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="number"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            {/* <Form.Text>Don't share your password!</Form.Text> */}
+          </Form.Group>
 
-        <button type="submit">Update Product</button>
-      </form>
+          <Form.Group controlId="formBrand">
+            <Form.Label>Brand</Form.Label>
+            <Form.Control
+              type="text"
+              name="brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+            />
+            {/* <Form.Text>Don't share your password!</Form.Text> */}
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="text"
+              name="imageURL"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+            />
+            {/* <Form.Text>Don't share your password!</Form.Text> */}
+          </Form.Group>
+        </Row>
+        <div className="text-center">
+          <Button type="submit" className="mt-3" variant="primary">
+            Update Product
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 }

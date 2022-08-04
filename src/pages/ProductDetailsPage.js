@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { Image } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductDetailsPage(props) {
   const [product, setProduct] = useState(null);
@@ -29,22 +31,15 @@ function ProductDetailsPage(props) {
     <div className="ProductDetails">
       {product && (
         <>
+          <Image src={product.imageURL} alt="{product.title}" fluid />
           <h1>{product.title}</h1>
-          <p>{product.description}</p>
+          <p>{product.price}</p>
+          <p>{product.short_desc}</p>
         </>
       )}
-      {product &&
-        product.tasks.map((task) => (
-          <li className="TaskCard card" key={task._id}>
-            <h3>{task.title}</h3>
-            <h4>Description:</h4>
-            <p>{task.description}</p>
-          </li>
-        ))}
       <Link to={`/products/edit/${productId}`}>
         <button>Edit</button>
       </Link>
-      &nbsp;
       <Link to="/products">
         <button>Back to products</button>
       </Link>
