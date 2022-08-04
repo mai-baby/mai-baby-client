@@ -11,8 +11,8 @@ function NavBar() {
   return (
     <Navbar
       className="px-5"
-      bg="dark"
-      variant="dark"
+      bg="light"
+      variant="light"
       sticky="top"
       expand="md"
       collapseOnSelect

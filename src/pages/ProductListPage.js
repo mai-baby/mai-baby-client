@@ -3,6 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AddProduct from "../components/AddProduct";
 
+import { Row, Col, Button, Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function ProductListPage() {
   const [products, setProducts] = useState([]);
 
@@ -28,16 +31,29 @@ function ProductListPage() {
     <div className="ProductListPage">
       <AddProduct refreshProducts={getAllProducts} />
       <hr />
-
-      {products.map((product) => {
-        return (
-          <div className="ProductCard card" key={product._id}>
-            <Link to={`/products/${product._id}`}>
-              <h3>{product.title}</h3>
-            </Link>
-          </div>
-        );
-      })}
+      <Row className="px-4">
+        {products.map((product) => {
+          return (
+            <Col
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="ProductCard card"
+              style={{ border: "none" }}
+              key={product._id}
+            >
+              <Card className="p-2" style={{ border: "none" }}>
+                <Link className="text-center" to={`/products/${product._id}`}>
+                  <Card.Img src={product.imageURL} />
+                  <Card.Title>{product.title}</Card.Title>
+                </Link>
+                <Card.Text className="text-center">{product.price}€</Card.Text>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 }
