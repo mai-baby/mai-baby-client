@@ -54,10 +54,15 @@ function NavBar() {
           )}
 
           {isLoggedIn && (
-            <Nav.Link eventKey="6">
-              <button onClick={logOutUser}>Logout</button>
-              <span>{user && user.name}</span>
-            </Nav.Link>
+            <>
+              <Nav.Link eventKey="6">
+                <NavLink to="/products/create">Add Product</NavLink>
+              </Nav.Link>
+              <Nav.Link eventKey="7">
+                <button onClick={logOutUser}>Logout</button>
+                <span>{user && user.name}</span>
+              </Nav.Link>
+            </>
           )}
         </Nav>
       </Navbar.Collapse>

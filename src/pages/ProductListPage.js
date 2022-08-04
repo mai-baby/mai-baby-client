@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import AddProduct from "../components/AddProduct";
 
 import { Row, Col, Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,7 +28,9 @@ function ProductListPage() {
 
   return (
     <div className="ProductListPage">
-      <AddProduct refreshProducts={getAllProducts} />
+      <h1 className="text-center m-2">
+        Discover the Brand New NBA Toddlers Collection!
+      </h1>
       <hr />
       <Row className="px-4">
         {products.map((product) => {
