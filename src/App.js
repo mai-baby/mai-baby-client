@@ -1,5 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
@@ -13,13 +15,40 @@ import LoginPage from "./pages/LoginPage";
 // import IsAnon from "./components/IsAnon";
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const getAllProducts = () => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/products`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => setProducts(response.data))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="App">
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductListPage />} />
+        <Route
+          path="/"
+          element={
+            <HomePage products={products} getAllProducts={getAllProducts} />
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <ProductListPage
+              products={products}
+              getAllProducts={getAllProducts}
+            />
+          }
+        />
         <Route path="/products/create" element={<CreateProductPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
         <Route path="/products/edit/:productId" element={<EditProductPage />} />

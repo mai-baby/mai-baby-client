@@ -7,7 +7,7 @@ import axios from "axios";
 function RegisterPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user_name, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function RegisterPage(props) {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, user_name };
+    const requestBody = { email, password, username };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -54,8 +54,8 @@ function RegisterPage(props) {
         <label>Name:</label>
         <input
           type="text"
-          name="user_name"
-          value={user_name}
+          name="username"
+          value={username}
           onChange={handleUsername}
         />
 

@@ -1,29 +1,14 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Row, Col, Button, Card } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function ProductListPage() {
-  const [products, setProducts] = useState([]);
-
-  const getAllProducts = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/products`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => setProducts(response.data))
-      .catch((error) => console.log(error));
-  };
-
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
+function ProductListPage(props) {
   useEffect(() => {
-    getAllProducts();
+    props.getAllProducts();
   }, []);
 
   return (
@@ -33,7 +18,7 @@ function ProductListPage() {
       </h1>
       <hr />
       <Row className="px-4">
-        {products.map((product) => {
+        {props.products.map((product) => {
           return (
             <Col
               xs={12}

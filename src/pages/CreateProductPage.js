@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function CreateProductPage(props) {
   const [title, setTitle] = useState("");
-  const [short_desc, setShortDesc] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -15,7 +15,7 @@ function CreateProductPage(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { title, short_desc, price, brand, imageURL };
+    const requestBody = { title, shortDescription, price, brand, imageURL };
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -51,9 +51,9 @@ function CreateProductPage(props) {
             <Form.Label>Short Description</Form.Label>
             <Form.Control
               type="text"
-              name="short_desc"
-              value={short_desc}
-              onChange={(e) => setShortDesc(e.target.value)}
+              name="shortDescription"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
             />
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>

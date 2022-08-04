@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function EditProductPage(props) {
   const [title, setTitle] = useState("");
-  const [short_desc, setShortDesc] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -24,7 +24,7 @@ function EditProductPage(props) {
       .then((response) => {
         const foundProduct = response.data;
         setTitle(foundProduct.title);
-        setShortDesc(foundProduct.short_desc);
+        setShortDescription(foundProduct.shortDescription);
         setPrice(foundProduct.price);
         setBrand(foundProduct.brand);
         setImageURL(foundProduct.imageURL);
@@ -35,7 +35,7 @@ function EditProductPage(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the body of the PUT request
-    const requestBody = { title, short_desc, price, brand, imageURL };
+    const requestBody = { title, shortDescription, price, brand, imageURL };
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -76,9 +76,9 @@ function EditProductPage(props) {
             <Form.Label>Short Description</Form.Label>
             <Form.Control
               type="text"
-              name="short_desc"
-              value={short_desc}
-              onChange={(e) => setShortDesc(e.target.value)}
+              name="shortDescription"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
             />
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>

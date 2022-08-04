@@ -47,7 +47,7 @@ function ProductDetailsPage(props) {
           <Image src={product.imageURL} alt="{product.title}" fluid />
           <h1>{product.title}</h1>
           <p>{product.price}</p>
-          <p>{product.short_desc}</p>
+          <p>{product.shortDescription}</p>
         </>
       )}
       <Link to={`/products/edit/${productId}`}>
