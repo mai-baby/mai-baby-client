@@ -52,6 +52,9 @@ function NavBar(props) {
               <Nav.Link eventKey="6">
                 <NavLink to="/products/create">Add Product</NavLink>
               </Nav.Link>
+              <Nav.Link eventKey="7">
+                <NavLink to="/orders">Orders</NavLink>
+              </Nav.Link>
               <Nav.Link eventKey="3">
                 <NavLink to="/basket">
                   <FontAwesomeIcon icon={faShoppingCart} />{" "}
@@ -62,7 +65,7 @@ function NavBar(props) {
                   )}
                 </NavLink>
               </Nav.Link>
-              <Nav.Link eventKey="7">
+              <Nav.Link eventKey="8">
                 <button onClick={logOutUser}>Logout</button>
                 <span>{user && user.name}</span>
               </Nav.Link>

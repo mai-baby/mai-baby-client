@@ -9,14 +9,9 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { Link } from "react-router-dom";
+
 function Basket(props) {
-  const itemsPrice = props.cartItems.reduce(
-    (accumulator, currentValue) =>
-      accumulator + currentValue.price * currentValue.quantity,
-    0
-  );
-  const shippingPrice = itemsPrice > 50 ? 0 : 5; // free shipping from 50€
-  const totalPrice = itemsPrice + shippingPrice;
   return (
     <aside className="m-4">
       <Row>
@@ -26,7 +21,7 @@ function Basket(props) {
             {props.cartItems.length === 0 && <div>Your cart is empty</div>}
           </div>
           {props.cartItems.map((item) => (
-            <Row key={item._id}>
+            <Row className="my-4" key={item._id}>
               <Col>
                 <Image
                   src={item.imageURL}
@@ -74,7 +69,7 @@ function Basket(props) {
                   <p>Items Price</p>
                 </Col>
                 <Col>
-                  <p>{itemsPrice.toFixed(2)}€</p>
+                  <p>{props.itemsPrice.toFixed(2)}€</p>
                 </Col>
               </Row>
               <Row>
@@ -82,7 +77,7 @@ function Basket(props) {
                   <p>Shipping</p>
                 </Col>
                 <Col>
-                  <p>{shippingPrice.toFixed(2)}€</p>
+                  <p>{props.shippingPrice.toFixed(2)}€</p>
                 </Col>
               </Row>
               <Row>
@@ -91,15 +86,17 @@ function Basket(props) {
                   <p>Total</p>
                 </Col>
                 <Col>
-                  <p>{totalPrice.toFixed(2)}€</p>
+                  <p>{props.totalPrice.toFixed(2)}€</p>
                 </Col>
                 <hr></hr>
               </Row>
               <Row>
                 <div className="text-center p-1">
-                  <Button variant="danger" style={{ width: "200px" }}>
-                    Checkout
-                  </Button>
+                  <Link to="/checkout">
+                    <Button variant="danger" style={{ width: "200px" }}>
+                      Checkout
+                    </Button>
+                  </Link>
                 </div>
               </Row>
               <Row>

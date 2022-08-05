@@ -12,6 +12,9 @@ import CreateProductPage from "./pages/products/CreateProductPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
 import BasketPage from "./pages/cart/BasketPage";
+import CheckoutPage from "./pages/cart/CheckoutPage";
+import ConfirmationPage from "./pages/cart/ConfirmationPage";
+import OrdersPage from "./pages/cart/OrdersPage";
 // import IsPrivate from "./components/auth/IsPrivate";
 // import IsAnon from "./components/auth/IsAnon";
 
@@ -19,6 +22,13 @@ function App() {
   // Shopping Cart Functions
 
   const [cartItems, setCartItems] = useState([]);
+  const itemsPrice = cartItems.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.price * currentValue.quantity,
+    0
+  );
+  const shippingPrice = itemsPrice > 50 ? 0 : 5; // free shipping from 50€
+  const totalPrice = itemsPrice + shippingPrice;
 
   const onAdd = (product) => {
     const existingCartItem = cartItems.find((item) => item._id === product._id);
@@ -55,6 +65,8 @@ function App() {
 
   // End of Shopping Cart Functions
 
+  // Products Functions
+
   const [products, setProducts] = useState([]);
 
   const getAllProducts = () => {
@@ -66,6 +78,22 @@ function App() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => setProducts(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  // Orders Functions
+
+  const [orders, setOrders] = useState([]);
+
+  const getAllOrders = () => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/orders`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => setOrders(response.data))
       .catch((error) => console.log(error));
   };
 
@@ -101,10 +129,24 @@ function App() {
             <BasketPage
               products={products}
               cartItems={cartItems}
+              totalPrice={totalPrice}
               onAdd={onAdd}
               onRemove={onRemove}
+              shippingPrice={shippingPrice}
+              itemsPrice={itemsPrice}
             />
           }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <CheckoutPage cartItems={cartItems} totalPrice={totalPrice} />
+          }
+        />
+        <Route path="/confirmation" element={<ConfirmationPage />} />
+        <Route
+          path="/orders"
+          element={<OrdersPage orders={orders} getAllOrders={getAllOrders} />}
         />
       </Routes>
     </div>

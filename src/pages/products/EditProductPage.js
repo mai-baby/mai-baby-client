@@ -72,7 +72,7 @@ function EditProductPage(props) {
             {/* <Form.Text>Don't share your email!</Form.Text> */}
           </Form.Group>
 
-          <Form.Group controlId="formPassword">
+          <Form.Group controlId="formShortDescription">
             <Form.Label>Short Description</Form.Label>
             <Form.Control
               type="text"
@@ -105,7 +105,7 @@ function EditProductPage(props) {
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
 
-          <Form.Group controlId="formPassword">
+          <Form.Group controlId="formImage">
             <Form.Label>Image</Form.Label>
             <Form.Control
               type="text"

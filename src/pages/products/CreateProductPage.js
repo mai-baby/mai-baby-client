@@ -23,7 +23,7 @@ function CreateProductPage(props) {
     console.log(requestBody);
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/products/add`, requestBody, {
+      .post(`${process.env.REACT_APP_API_URL}/api/products`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
