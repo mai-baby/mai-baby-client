@@ -35,7 +35,13 @@ function OrdersPage(props) {
                   <div>
                     <Row className="my-4">
                       {order.products.map((product, i) => {
-                        if (order.products.length === 2) {
+                        if (order.products.length === 1) {
+                          return (
+                            <>
+                              <Card.Img src={product.imageURL} fluid="true" />
+                            </>
+                          );
+                        } else if (order.products.length === 2) {
                           return (
                             <>
                               <Col style={{ padding: "0" }} className="col-6">

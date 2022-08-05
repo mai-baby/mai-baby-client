@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { AuthContext } from "../../context/auth.context";
+import { useContext } from "react";
+
 function CheckoutPage(props) {
+  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
+
   const { cartItems, totalPrice } = props;
 
   const [fullname, setFullname] = useState("");
@@ -21,6 +26,7 @@ function CheckoutPage(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
+      customer: user?._id,
       products: pushProducts,
       totalPrice,
       status: "Order received",
