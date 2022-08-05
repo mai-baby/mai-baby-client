@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Basket from "../components/Basket";
+import Basket from "../../components/cart/Basket";
 
 function BasketPage(props) {
   const { cartItems, onAdd, onRemove } = props;

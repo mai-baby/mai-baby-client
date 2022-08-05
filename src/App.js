@@ -1,19 +1,19 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import NavBar from "./components/NavBar";
-import HomePage from "./pages/HomePage";
-import ProductListPage from "./pages/ProductListPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
-import EditProductPage from "./pages/EditProductPage";
-import CreateProductPage from "./pages/CreateProductPage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
-import BasketPage from "./pages/BasketPage";
-// import IsPrivate from "./components/IsPrivate";
-// import IsAnon from "./components/IsAnon";
+import NavBar from "./components/nav/NavBar";
+import HomePage from "./pages/home/HomePage";
+import ProductListPage from "./pages/products/ProductListPage";
+import ProductDetailsPage from "./pages/products/ProductDetailsPage";
+import EditProductPage from "./pages/products/EditProductPage";
+import CreateProductPage from "./pages/products/CreateProductPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import LoginPage from "./pages/auth/LoginPage";
+import BasketPage from "./pages/cart/BasketPage";
+// import IsPrivate from "./components/auth/IsPrivate";
+// import IsAnon from "./components/auth/IsAnon";
 
 function App() {
   // Shopping Cart Functions

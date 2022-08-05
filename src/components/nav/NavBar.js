@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar(props) {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -33,12 +35,6 @@ function NavBar(props) {
           <Nav.Link eventKey="2">
             <NavLink to="/products">Products</NavLink>
           </Nav.Link>
-          <Nav.Link eventKey="3">
-            <NavLink to="/basket">
-              Basket{" "}
-              {props.countCartItems ? <span>{props.countCartItems}</span> : ""}
-            </NavLink>
-          </Nav.Link>
 
           {!isLoggedIn && (
             <>
@@ -55,6 +51,16 @@ function NavBar(props) {
             <>
               <Nav.Link eventKey="6">
                 <NavLink to="/products/create">Add Product</NavLink>
+              </Nav.Link>
+              <Nav.Link eventKey="3">
+                <NavLink to="/basket">
+                  <FontAwesomeIcon icon={faShoppingCart} />{" "}
+                  {props.countCartItems ? (
+                    <span>{props.countCartItems}</span>
+                  ) : (
+                    ""
+                  )}
+                </NavLink>
               </Nav.Link>
               <Nav.Link eventKey="7">
                 <button onClick={logOutUser}>Logout</button>

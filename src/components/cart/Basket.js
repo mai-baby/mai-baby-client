@@ -15,9 +15,8 @@ function Basket(props) {
       accumulator + currentValue.price * currentValue.quantity,
     0
   );
-  const taxPrice = itemsPrice * 0.19;
   const shippingPrice = itemsPrice > 50 ? 0 : 5; // free shipping from 50€
-  const totalPrice = itemsPrice + taxPrice + shippingPrice;
+  const totalPrice = itemsPrice + shippingPrice;
   return (
     <aside className="m-4">
       <Row>
@@ -28,24 +27,40 @@ function Basket(props) {
           </div>
           {props.cartItems.map((item) => (
             <Row key={item._id}>
-              <h5>{item.title}</h5>
-              {/* <Image src={item.imageURL} alt={item.title} /> */}
-              <Button
-                onClick={() => props.onAdd(item)}
-                style={{ width: "60px" }}
-              >
-                +
-              </Button>
-              <Button
-                onClick={() => props.onRemove(item)}
-                style={{ width: "60px" }}
-                variant="danger"
-              >
-                -
-              </Button>
-              <h6>
-                {item.quantity} x {item.price.toFixed(2)}€
-              </h6>
+              <Col>
+                <Image
+                  src={item.imageURL}
+                  alt={item.title}
+                  style={{ width: "60px" }}
+                />
+              </Col>
+              <Col>
+                <h6>{item.title}</h6>
+              </Col>
+              <Col>
+                <h6 className="text-center">
+                  {item.quantity} x {item.price.toFixed(2)}€
+                </h6>
+                <div className="text-center">
+                  <span className="px-1">
+                    <Button
+                      onClick={() => props.onAdd(item)}
+                      style={{ width: "30%" }}
+                    >
+                      +
+                    </Button>
+                  </span>
+                  <span className="px-1">
+                    <Button
+                      onClick={() => props.onRemove(item)}
+                      style={{ width: "30%" }}
+                      variant="danger"
+                    >
+                      -
+                    </Button>
+                  </span>
+                </div>
+              </Col>
             </Row>
           ))}
         </Col>
@@ -64,14 +79,6 @@ function Basket(props) {
               </Row>
               <Row>
                 <Col>
-                  <p>Tax</p>
-                </Col>
-                <Col>
-                  <p>{taxPrice.toFixed(2)}€</p>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
                   <p>Shipping</p>
                 </Col>
                 <Col>
@@ -79,17 +86,27 @@ function Basket(props) {
                 </Col>
               </Row>
               <Row>
+                <hr></hr>
                 <Col>
                   <p>Total</p>
                 </Col>
                 <Col>
                   <p>{totalPrice.toFixed(2)}€</p>
                 </Col>
+                <hr></hr>
               </Row>
-              <hr></hr>
               <Row>
-                <div className="text-center">
-                  <Button variant="danger">Checkout</Button>
+                <div className="text-center p-1">
+                  <Button variant="danger" style={{ width: "200px" }}>
+                    Checkout
+                  </Button>
+                </div>
+              </Row>
+              <Row>
+                <div className="text-center p-1">
+                  <Button variant="primary" style={{ width: "200px" }}>
+                    Paypal
+                  </Button>
                 </div>
               </Row>
             </>

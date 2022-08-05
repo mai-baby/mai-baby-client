@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import ControlledCarousel from "../components/ControlledCarousel";
+import ControlledCarousel from "../../components/home/ControlledCarousel";
 
 function HomePage(props) {
   return (
