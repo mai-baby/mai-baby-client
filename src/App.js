@@ -16,7 +16,44 @@ import BasketPage from "./pages/BasketPage";
 // import IsAnon from "./components/IsAnon";
 
 function App() {
+  // Shopping Cart Functions
+
   const [cartItems, setCartItems] = useState([]);
+
+  const onAdd = (product) => {
+    const existingCartItem = cartItems.find((item) => item._id === product._id);
+    if (existingCartItem) {
+      setCartItems(
+        cartItems.map((item) =>
+          item._id === product._id
+            ? { ...existingCartItem, quantity: existingCartItem.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const onRemove = (product) => {
+    const existingCartItem = cartItems.find((item) => item._id === product._id);
+    if (existingCartItem.quantity === 1) {
+      setCartItems(cartItems.filter((item) => item._id !== product._id));
+    } else {
+      setCartItems(
+        cartItems.map((item) =>
+          item._id === product._id
+            ? {
+                ...existingCartItem,
+                quantity: existingCartItem.quantity - 1,
+              }
+            : item
+        )
+      );
+    }
+  };
+
+  // End of Shopping Cart Functions
 
   const [products, setProducts] = useState([]);
 
@@ -49,6 +86,7 @@ function App() {
             <ProductListPage
               products={products}
               getAllProducts={getAllProducts}
+              onAdd={onAdd}
             />
           }
         />
@@ -62,10 +100,9 @@ function App() {
           element={
             <BasketPage
               products={products}
-              setProducts={setProducts}
-              getAllProducts={getAllProducts}
               cartItems={cartItems}
-              setCartItems={setCartItems}
+              onAdd={onAdd}
+              onRemove={onRemove}
             />
           }
         />

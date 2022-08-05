@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductListPage(props) {
+  const { onAdd } = props;
+
   useEffect(() => {
     props.getAllProducts();
   }, []);
@@ -36,6 +39,9 @@ function ProductListPage(props) {
                 </Link>
                 <Card.Text className="text-center">{product.price}€</Card.Text>
               </Card>
+              <div className="text-center">
+                <Button onClick={() => onAdd(product)}>Add to Cart</Button>
+              </div>
             </Col>
           );
         })}

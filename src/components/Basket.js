@@ -19,65 +19,83 @@ function Basket(props) {
   const shippingPrice = itemsPrice > 50 ? 0 : 5; // free shipping from 50€
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   return (
-    <aside>
-      <h2>Cart Items</h2>
-      <div>{props.cartItems.length === 0 && <div>Your cart is empty</div>}</div>
-      {props.cartItems.map((item) => (
-        <Row key={item._id}>
-          <h3>{item.title}</h3>
-          {/* <Image src={item.imageURL} alt={item.title} /> */}
-          <Button onClick={() => props.onAdd(item)} className="addButton">
-            +
-          </Button>
-          <Button onClick={() => props.onRemove(item)} className="removeButton">
-            -
-          </Button>
-          <h4>
-            {item.quantity} x {item.price.toFixed(2)}€
-          </h4>
-        </Row>
-      ))}
-      {props.cartItems.length !== 0 && (
-        <>
-          <hr></hr>
-          <Row>
-            <Col>
-              <h3>Items Price</h3>
-            </Col>
-            <Col>
-              <h4>{itemsPrice.toFixed(2)}€</h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h3>Tax</h3>
-            </Col>
-            <Col>
-              <h4>{taxPrice.toFixed(2)}€</h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h3>Shipping</h3>
-            </Col>
-            <Col>
-              <h4>{shippingPrice.toFixed(2)}€</h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h3>Total</h3>
-            </Col>
-            <Col>
-              <h2>{totalPrice.toFixed(2)}€</h2>
-            </Col>
-          </Row>
-          <hr></hr>
-          <Row>
-            <Button variant="danger">Checkout</Button>
-          </Row>
-        </>
-      )}
+    <aside className="m-4">
+      <Row>
+        <Col>
+          <h2>Cart Items</h2>
+          <div>
+            {props.cartItems.length === 0 && <div>Your cart is empty</div>}
+          </div>
+          {props.cartItems.map((item) => (
+            <Row key={item._id}>
+              <h5>{item.title}</h5>
+              {/* <Image src={item.imageURL} alt={item.title} /> */}
+              <Button
+                onClick={() => props.onAdd(item)}
+                style={{ width: "60px" }}
+              >
+                +
+              </Button>
+              <Button
+                onClick={() => props.onRemove(item)}
+                style={{ width: "60px" }}
+                variant="danger"
+              >
+                -
+              </Button>
+              <h6>
+                {item.quantity} x {item.price.toFixed(2)}€
+              </h6>
+            </Row>
+          ))}
+        </Col>
+        <Col>
+          {props.cartItems.length !== 0 && (
+            <>
+              <h1>Summary</h1>
+              <hr></hr>
+              <Row>
+                <Col>
+                  <p>Items Price</p>
+                </Col>
+                <Col>
+                  <p>{itemsPrice.toFixed(2)}€</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <p>Tax</p>
+                </Col>
+                <Col>
+                  <p>{taxPrice.toFixed(2)}€</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <p>Shipping</p>
+                </Col>
+                <Col>
+                  <p>{shippingPrice.toFixed(2)}€</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <p>Total</p>
+                </Col>
+                <Col>
+                  <p>{totalPrice.toFixed(2)}€</p>
+                </Col>
+              </Row>
+              <hr></hr>
+              <Row>
+                <div className="text-center">
+                  <Button variant="danger">Checkout</Button>
+                </div>
+              </Row>
+            </>
+          )}
+        </Col>
+      </Row>
     </aside>
   );
 }
