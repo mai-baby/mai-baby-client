@@ -11,10 +11,13 @@ import EditProductPage from "./pages/EditProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import BasketPage from "./pages/BasketPage";
 // import IsPrivate from "./components/IsPrivate";
 // import IsAnon from "./components/IsAnon";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
   const [products, setProducts] = useState([]);
 
   const getAllProducts = () => {
@@ -31,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar countCartItems={cartItems.length} />
 
       <Routes>
         <Route
@@ -54,6 +57,18 @@ function App() {
         <Route path="/products/edit/:productId" element={<EditProductPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/basket"
+          element={
+            <BasketPage
+              products={products}
+              setProducts={setProducts}
+              getAllProducts={getAllProducts}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+            />
+          }
+        />
       </Routes>
     </div>
   );

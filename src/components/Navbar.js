@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function NavBar() {
+function NavBar(props) {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
@@ -34,8 +34,10 @@ function NavBar() {
             <NavLink to="/products">Products</NavLink>
           </Nav.Link>
           <Nav.Link eventKey="3">
-            {/* UPDATE: Add Shopping Cart or Orders!! */}
-            <NavLink to="/order">My Orders</NavLink>
+            <NavLink to="/basket">
+              Basket{" "}
+              {props.countCartItems ? <span>{props.countCartItems}</span> : ""}
+            </NavLink>
           </Nav.Link>
 
           {!isLoggedIn && (
