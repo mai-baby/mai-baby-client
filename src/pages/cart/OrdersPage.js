@@ -25,37 +25,35 @@ function OrdersPage(props) {
               xs={12}
               sm={6}
               md={4}
-              lg={3}
+              lg={4}
               className="ProductCard card"
               style={{ border: "none" }}
               key={order._id}
             >
-              <Card className="p-2" style={{ border: "none" }}>
+              <Card className="p-2 my-4" style={{ border: "none" }}>
                 <Link className="text-center" to={`/orders/${order._id}`}>
                   <div>
-                    <Row>
-                      <Col>
-                        <Card.Img
-                          src={order.products[0].imageURL}
-                          fluid="true"
-                        />
-                      </Col>
-                      <Col>
-                        <Card.Img
-                          src={order.products[1].imageURL}
-                          fluid="true"
-                        />
-                      </Col>
-                      {/* {order.products[2].imageURL !== undefined && (
-                        <Col>
-                          <Card.Img src={order.products[2].imageURL} fluid="true" />
-                        </Col>
-                      )}
-                      {order.products[3].imageURL !== undefined && (
-                        <Col>
-                          <Card.Img src={order.products[3].imageURL} fluid="true" />
-                        </Col>
-                      )} */}
+                    <Row className="my-4">
+                      {order.products.map((product, i) => {
+                        if (order.products.length === 2) {
+                          return (
+                            <>
+                              <Col style={{ padding: "0" }} className="col-6">
+                                <Card.Img src={product.imageURL} fluid="true" />
+                              </Col>
+                              <Col style={{ padding: "0" }} className="col-6">
+                                <Card.Img src={product.imageURL} fluid="true" />
+                              </Col>
+                            </>
+                          );
+                        } else if (i < 4) {
+                          return (
+                            <Col style={{ padding: "0" }} className="col-6">
+                              <Card.Img src={product.imageURL} fluid="true" />
+                            </Col>
+                          );
+                        }
+                      })}
                     </Row>
                   </div>
                   <Card.Title>Status: {order.status}</Card.Title>
