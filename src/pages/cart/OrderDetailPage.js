@@ -58,26 +58,81 @@ function OrderDetailsPage(props) {
     <div className="OrderDetailsPage">
       <h1 className="text-center m-2">Order Details</h1>
       <hr />
+      <Link to={"/orders/edit/" + orderId}>
+        <Button>Edit Order</Button>
+      </Link>
+      <Button
+        variant="danger"
+        onClick={() => {
+          deleteOrder(orderId);
+        }}
+      >
+        Cancel Order
+      </Button>
+      <Link to="/orders">
+        <Button>Back to Orders</Button>
+      </Link>
+      <div className="text-left">
+        <h3>Shipment Details</h3>
+        <h6>
+          Full Name:
+          <br />
+          {order?.address.fullname}
+        </h6>
+        <h6>
+          Street:
+          <br />
+          {order?.address.street}
+        </h6>
+        <h6>
+          Postal:
+          <br />
+          {order?.address.postal}
+        </h6>
+        <h6>
+          City:
+          <br />
+          {order?.address.city}
+        </h6>
+        <h6>
+          State:
+          <br />
+          {order?.address.state}
+        </h6>
+        <h6>
+          Country:
+          <br />
+          {order?.address.country}
+        </h6>
+      </div>
+
       <Row className="px-4">
-        <Col>
-          {/* Add Loading Spinner */}
-          {order?.products.map((item) => {
-            return (
+        {/* Add Loading Spinner */}
+        {order?.products.map((item) => {
+          return (
+            <div>
               <Col
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
                 className="ProductCard card mx-auto"
-                style={{ border: "none", maxWidth: "400px" }}
+                style={{ border: "none", maxWidth: "200px" }}
                 key={item._id}
               >
-                <Card className="p-2" style={{ border: "none" }}>
-                  <Link className="text-center" to={`/products/${item._id}`}>
-                    <Card.Img src={item.imageURL} />
-                    <Card.Title>{item.title}</Card.Title>
-                  </Link>
-                  <Card.Text className="text-center">{item.price}€</Card.Text>
+                <Card style={{ border: "none" }}>
+                  <Row
+                    className="d-flex justify-content-center
+                      align-items-center"
+                  >
+                    <Link className="text-center" to={`/products/${item._id}`}>
+                      <Card.Img src={item.imageURL} />
+                    </Link>
+                  </Row>
+                  <Row>
+                    <Link to={`/products/${item._id}`}>
+                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Text className="text-center">
+                        {item.price}€
+                      </Card.Text>
+                    </Link>
+                  </Row>
                 </Card>
                 <div className="text-center">
                   <Button
@@ -88,59 +143,11 @@ function OrderDetailsPage(props) {
                     Remove from Order
                   </Button>
                 </div>
+                <hr />
               </Col>
-            );
-          })}
-        </Col>
-        <Col>
-          <Link to={"/orders/edit/" + orderId}>
-            <Button>Edit Order</Button>
-          </Link>
-          <Button
-            variant="danger"
-            onClick={() => {
-              deleteOrder(orderId);
-            }}
-          >
-            Cancel Order
-          </Button>
-          <Link to="/orders">
-            <Button>Back to Orders</Button>
-          </Link>
-          <div className="text-left">
-            <h3>Shipment Details</h3>
-            <h6>
-              Full Name:
-              <br />
-              {order?.address.fullname}
-            </h6>
-            <h6>
-              Street:
-              <br />
-              {order?.address.street}
-            </h6>
-            <h6>
-              Postal:
-              <br />
-              {order?.address.postal}
-            </h6>
-            <h6>
-              City:
-              <br />
-              {order?.address.city}
-            </h6>
-            <h6>
-              State:
-              <br />
-              {order?.address.state}
-            </h6>
-            <h6>
-              Country:
-              <br />
-              {order?.address.country}
-            </h6>
-          </div>
-        </Col>
+            </div>
+          );
+        })}
       </Row>
     </div>
   );

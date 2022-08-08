@@ -79,7 +79,7 @@ function OrdersPage(props) {
                 </Col>
                 <Col className="text-left p-2 my-auto">
                   <p>Status: {order.status}</p>
-                  <p>Total price of this order was: {order.totalPrice}€</p>
+                  <p>Subtotal: {order.totalPrice}€</p>
                   <Link
                     className="d-flex text-center justify-content-center"
                     to={`/orders/${order._id}`}
