@@ -59,51 +59,89 @@ function OrderDetailsPage(props) {
       <h1 className="text-center m-2">Order Details</h1>
       <hr />
       <Row className="px-4">
-        {/* Add Loading Spinner */}
-        {order?.products.map((item) => {
-          return (
-            <Col
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              className="ProductCard card"
-              style={{ border: "none" }}
-              key={item._id}
-            >
-              <Card className="p-2" style={{ border: "none" }}>
-                <Link className="text-center" to={`/products/${item._id}`}>
-                  <Card.Img src={item.imageURL} />
-                  <Card.Title>{item.title}</Card.Title>
-                </Link>
-                <Card.Text className="text-center">{item.price}€</Card.Text>
-              </Card>
-              <div className="text-center">
-                <Button
-                  onClick={() => {
-                    deleteItemFromOrder(item._id);
-                  }}
-                >
-                  Remove from Order
-                </Button>
-              </div>
-            </Col>
-          );
-        })}
+        <Col>
+          {/* Add Loading Spinner */}
+          {order?.products.map((item) => {
+            return (
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                className="ProductCard card mx-auto"
+                style={{ border: "none", maxWidth: "400px" }}
+                key={item._id}
+              >
+                <Card className="p-2" style={{ border: "none" }}>
+                  <Link className="text-center" to={`/products/${item._id}`}>
+                    <Card.Img src={item.imageURL} />
+                    <Card.Title>{item.title}</Card.Title>
+                  </Link>
+                  <Card.Text className="text-center">{item.price}€</Card.Text>
+                </Card>
+                <div className="text-center">
+                  <Button
+                    onClick={() => {
+                      deleteItemFromOrder(item._id);
+                    }}
+                  >
+                    Remove from Order
+                  </Button>
+                </div>
+              </Col>
+            );
+          })}
+        </Col>
+        <Col>
+          <Link to={"/orders/edit/" + orderId}>
+            <Button>Edit Order</Button>
+          </Link>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteOrder(orderId);
+            }}
+          >
+            Cancel Order
+          </Button>
+          <Link to="/orders">
+            <Button>Back to Orders</Button>
+          </Link>
+          <div className="text-left">
+            <h3>Shipment Details</h3>
+            <h6>
+              Full Name:
+              <br />
+              {order?.address.fullname}
+            </h6>
+            <h6>
+              Street:
+              <br />
+              {order?.address.street}
+            </h6>
+            <h6>
+              Postal:
+              <br />
+              {order?.address.postal}
+            </h6>
+            <h6>
+              City:
+              <br />
+              {order?.address.city}
+            </h6>
+            <h6>
+              State:
+              <br />
+              {order?.address.state}
+            </h6>
+            <h6>
+              Country:
+              <br />
+              {order?.address.country}
+            </h6>
+          </div>
+        </Col>
       </Row>
-      <div className="text-center">
-        <Button
-          variant="danger"
-          onClick={() => {
-            deleteOrder(orderId);
-          }}
-        >
-          Delete
-        </Button>
-        <Link to="/orders">
-          <Button>Back to Orders</Button>
-        </Link>
-      </div>
     </div>
   );
 }

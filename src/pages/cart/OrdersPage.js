@@ -29,9 +29,9 @@ function OrdersPage(props) {
         >
           {orders.map((order) => {
             return (
-              <Row>
+              <Row key={order._id}>
                 <Col>
-                  <Card className="p-4 m-4" key={order._id}>
+                  <Card className="p-4 m-4">
                     <Link className="text-center" to={`/orders/${order._id}`}>
                       <div>
                         <Row className="my-4">

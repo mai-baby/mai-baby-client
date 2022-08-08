@@ -1,17 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Row, Col, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { AuthContext } from "../../context/auth.context";
-import { useContext } from "react";
-
-function CheckoutPage(props) {
-  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
-
-  const { cartItems, totalPrice } = props;
-
+function EditOrderPage(props) {
   const [fullname, setFullname] = useState("");
   const [street, setStreet] = useState("");
   const [postal, setPostal] = useState("");
@@ -19,35 +12,49 @@ function CheckoutPage(props) {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
 
+  const { orderId } = useParams();
   const navigate = useNavigate();
 
-  const pushProducts = cartItems.map((item) => item._id);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/orders/${orderId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        const foundOrder = response.data;
+        setFullname(foundOrder.address.fullname);
+        setStreet(foundOrder.address.street);
+        setPostal(foundOrder.address.postal);
+        setCity(foundOrder.address.city);
+        setState(foundOrder.address.state);
+        setCountry(foundOrder.address.country);
+      })
+      .catch((error) => console.log(error));
+  }, [orderId]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
-      customer: user?._id,
-      products: pushProducts,
-      totalPrice,
-      status: "Order received",
       address: { fullname, street, postal, city, state, country },
     };
-
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/checkout`, requestBody, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+      .put(
+        `${process.env.REACT_APP_API_URL}/api/orders/edit/${orderId}`,
+        requestBody,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      )
       .then(() => {
-        props.setCartItems([]);
-        navigate(`/confirmation`);
+        navigate(`/orders/${orderId}`);
       });
   };
 
   return (
-    <div className="CheckoutPage m-4">
-      <h3 className="text-center">Fill in your address:</h3>
+    <div className="EditOrderPage m-4">
+      <h3 className="text-center">Edit the Order</h3>
       <Form onSubmit={handleFormSubmit}>
         <Row>
           <Form.Group controlId="formFullname">
@@ -117,7 +124,7 @@ function CheckoutPage(props) {
         </Row>
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
-            Order
+            Change Details
           </Button>
         </div>
       </Form>
@@ -125,4 +132,4 @@ function CheckoutPage(props) {
   );
 }
 
-export default CheckoutPage;
+export default EditOrderPage;

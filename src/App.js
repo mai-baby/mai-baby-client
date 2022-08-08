@@ -16,6 +16,7 @@ import CheckoutPage from "./pages/cart/CheckoutPage";
 import ConfirmationPage from "./pages/cart/ConfirmationPage";
 import OrdersPage from "./pages/cart/OrdersPage";
 import OrderDetailPage from "./pages/cart/OrderDetailPage";
+import EditOrderPage from "./pages/cart/EditOrderPage";
 // import IsPrivate from "./components/auth/IsPrivate";
 // import IsAnon from "./components/auth/IsAnon";
 
@@ -154,6 +155,7 @@ function App() {
           element={<OrdersPage orders={orders} getAllOrders={getAllOrders} />}
         />
         <Route path="/orders/:orderId" element={<OrderDetailPage />} />
+        <Route path="/orders/edit/:orderId" element={<EditOrderPage />} />
       </Routes>
     </div>
   );
