@@ -28,6 +28,7 @@ function OrdersPage(props) {
           style={{ border: "none", maxWidth: "600px" }}
         >
           {orders.map((order) => {
+            const formattedDate = order?.updatedAt?.split("T")[0];
             return (
               <Row key={order._id}>
                 <Col>
@@ -78,8 +79,11 @@ function OrdersPage(props) {
                   </Card>
                 </Col>
                 <Col className="text-left p-2 my-auto">
-                  <p>Status: {order.status}</p>
-                  <p>Subtotal: {order.totalPrice}€</p>
+                  <p>Status: {order?.status}</p>
+                  <p>Sent to: {order?.address.fullname}</p>
+                  <p>Subtotal: {order?.totalPrice}€</p>
+                  <p>Order Date: {formattedDate}</p>
+                  <p>Order ID: {order?._id}</p>
                   <Link
                     className="d-flex text-center justify-content-center"
                     to={`/orders/${order._id}`}

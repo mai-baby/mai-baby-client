@@ -54,6 +54,8 @@ function OrderDetailsPage(props) {
       });
   };
 
+  const formattedDate = order?.updatedAt?.split("T")[0];
+
   return (
     <div className="OrderDetailsPage">
       <h1 className="text-center m-2">Order Details</h1>
@@ -72,39 +74,48 @@ function OrderDetailsPage(props) {
       <Link to="/orders">
         <Button>Back to Orders</Button>
       </Link>
-      <div className="text-left">
-        <h3>Shipment Details</h3>
-        <h6>
-          Full Name:
-          <br />
-          {order?.address.fullname}
-        </h6>
-        <h6>
-          Street:
-          <br />
-          {order?.address.street}
-        </h6>
-        <h6>
-          Postal:
-          <br />
-          {order?.address.postal}
-        </h6>
-        <h6>
-          City:
-          <br />
-          {order?.address.city}
-        </h6>
-        <h6>
-          State:
-          <br />
-          {order?.address.state}
-        </h6>
-        <h6>
-          Country:
-          <br />
-          {order?.address.country}
-        </h6>
-      </div>
+      <Row>
+        <Col className="text-left">
+          <h3>Shipment Details</h3>
+          <h6>
+            Full Name:
+            <br />
+            {order?.address.fullname}
+          </h6>
+          <h6>
+            Street:
+            <br />
+            {order?.address.street}
+          </h6>
+          <h6>
+            Postal:
+            <br />
+            {order?.address.postal}
+          </h6>
+          <h6>
+            City:
+            <br />
+            {order?.address.city}
+          </h6>
+          <h6>
+            State:
+            <br />
+            {order?.address.state}
+          </h6>
+          <h6>
+            Country:
+            <br />
+            {order?.address.country}
+          </h6>
+        </Col>
+        <Col>
+          <p>Status: {order?.status}</p>
+          <p>Sent to: {order?.address.fullname}</p>
+          <p>Subtotal: {order?.totalPrice}€</p>
+          <p>Order Date: {formattedDate}</p>
+          <p>Order ID: {order?._id}</p>
+        </Col>
+      </Row>
 
       <Row className="px-4">
         {/* Add Loading Spinner */}
