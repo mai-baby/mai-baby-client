@@ -40,6 +40,7 @@ function CheckoutPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
+        props.setCartItems([]);
         navigate(`/confirmation`);
       });
   };

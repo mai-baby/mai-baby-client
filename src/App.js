@@ -15,6 +15,7 @@ import BasketPage from "./pages/cart/BasketPage";
 import CheckoutPage from "./pages/cart/CheckoutPage";
 import ConfirmationPage from "./pages/cart/ConfirmationPage";
 import OrdersPage from "./pages/cart/OrdersPage";
+import OrderDetailPage from "./pages/cart/OrderDetailPage";
 // import IsPrivate from "./components/auth/IsPrivate";
 // import IsAnon from "./components/auth/IsAnon";
 
@@ -140,7 +141,11 @@ function App() {
         <Route
           path="/checkout"
           element={
-            <CheckoutPage cartItems={cartItems} totalPrice={totalPrice} />
+            <CheckoutPage
+              cartItems={cartItems}
+              totalPrice={totalPrice}
+              setCartItems={setCartItems}
+            />
           }
         />
         <Route path="/confirmation" element={<ConfirmationPage />} />
@@ -148,6 +153,7 @@ function App() {
           path="/orders"
           element={<OrdersPage orders={orders} getAllOrders={getAllOrders} />}
         />
+        <Route path="/orders/:orderId" element={<OrderDetailPage />} />
       </Routes>
     </div>
   );

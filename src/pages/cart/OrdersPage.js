@@ -18,62 +18,79 @@ function OrdersPage(props) {
     <div className="OrdersPage">
       <h1 className="text-center m-2">Here are your most recent orders!</h1>
       <hr />
-      <Row className="px-4">
-        {orders.map((order) => {
-          return (
-            <Col
-              xs={12}
-              sm={6}
-              md={4}
-              lg={4}
-              className="ProductCard card"
-              style={{ border: "none" }}
-              key={order._id}
-            >
-              <Card className="p-2 my-4" style={{ border: "none" }}>
-                <Link className="text-center" to={`/orders/${order._id}`}>
-                  <div>
-                    <Row className="my-4">
-                      {order.products.map((product, i) => {
-                        if (order.products.length === 1) {
-                          return (
-                            <>
-                              <Card.Img src={product.imageURL} fluid="true" />
-                            </>
-                          );
-                        } else if (order.products.length === 2) {
-                          return (
-                            <>
-                              <Col style={{ padding: "0" }} className="col-6">
-                                <Card.Img src={product.imageURL} fluid="true" />
-                              </Col>
-                              <Col style={{ padding: "0" }} className="col-6">
-                                <Card.Img src={product.imageURL} fluid="true" />
-                              </Col>
-                            </>
-                          );
-                        } else if (i < 4) {
-                          return (
-                            <Col style={{ padding: "0" }} className="col-6">
-                              <Card.Img src={product.imageURL} fluid="true" />
-                            </Col>
-                          );
-                        }
-                      })}
-                    </Row>
-                  </div>
-                  <Card.Title>Status: {order.status}</Card.Title>
-                </Link>
-                <Card.Text className="text-center">
-                  Total price of this order was: {order.totalPrice}€
-                </Card.Text>
-              </Card>
-              <div className="text-center">
-                <Button>Cancel Order</Button>
-              </div>
-            </Col>
-          );
-        })}
+      <Row className="px-4 ">
+        <Col
+          // xs={12}
+          // sm={6}
+          // md={4}
+          // lg={4}
+          className="ProductCard card col-12 mx-auto"
+          style={{ border: "none", maxWidth: "600px" }}
+        >
+          {orders.map((order) => {
+            return (
+              <Row>
+                <Col>
+                  <Card className="p-4 m-4" key={order._id}>
+                    <Link className="text-center" to={`/orders/${order._id}`}>
+                      <div>
+                        <Row className="my-4">
+                          {order.products.map((product, i) => {
+                            if (order.products.length === 1) {
+                              return (
+                                <Card.Img
+                                  key={product._id}
+                                  src={product.imageURL}
+                                  fluid="true"
+                                />
+                              );
+                            } else if (order.products.length === 2) {
+                              return (
+                                <Col
+                                  key={product._id}
+                                  style={{ padding: "0" }}
+                                  className="col-6"
+                                >
+                                  <Card.Img
+                                    src={product.imageURL}
+                                    fluid="true"
+                                  />
+                                </Col>
+                              );
+                            } else if (i < 4) {
+                              return (
+                                <Col
+                                  key={product._id}
+                                  style={{ padding: "0" }}
+                                  className="col-6"
+                                >
+                                  <Card.Img
+                                    src={product.imageURL}
+                                    fluid="true"
+                                  />
+                                </Col>
+                              );
+                            }
+                          })}
+                        </Row>
+                      </div>
+                    </Link>
+                  </Card>
+                </Col>
+                <Col className="text-left p-2 my-auto">
+                  <p>Status: {order.status}</p>
+                  <p>Total price of this order was: {order.totalPrice}€</p>
+                  <Link
+                    className="d-flex text-center justify-content-center"
+                    to={`/orders/${order._id}`}
+                  >
+                    <Button>Order Details</Button>
+                  </Link>
+                </Col>
+              </Row>
+            );
+          })}
+        </Col>
       </Row>
     </div>
   );
