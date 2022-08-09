@@ -5,20 +5,15 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar(props) {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
+  console.log(user);
+
   return (
-    <Navbar
-      className="px-5"
-      bg="light"
-      variant="light"
-      sticky="top"
-      expand="md"
-      collapseOnSelect
-    >
+    <Navbar className="px-5 nav-bg" sticky="top" expand="md" collapseOnSelect>
       <Navbar.Brand>
         <NavLink to="/">
           {/* <img src="/logo512.png" alt="brand logo" style={{ width: "40px" }} /> */}
@@ -29,46 +24,46 @@ function NavBar(props) {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto">
-          <Nav.Link eventKey="1">
-            <NavLink to="/">Home</NavLink>
-          </Nav.Link>
-          <Nav.Link eventKey="2">
-            <NavLink to="/products">Products</NavLink>
-          </Nav.Link>
+          <NavLink to="/" eventKey="1">
+            Home
+          </NavLink>
+          <NavLink to="/products" eventKey="2">
+            Products
+          </NavLink>
 
           {!isLoggedIn && (
             <>
-              <Nav.Link eventKey="4">
-                <NavLink to="/register">Sign Up</NavLink>
-              </Nav.Link>
-              <Nav.Link eventKey="5">
-                <NavLink to="/login">Login</NavLink>
-              </Nav.Link>
+              <NavLink to="/register" eventKey="4">
+                Sign Up
+              </NavLink>
+              <NavLink to="/login" eventKey="5">
+                Login
+              </NavLink>
             </>
           )}
 
           {isLoggedIn && (
             <>
-              <Nav.Link eventKey="6">
-                <NavLink to="/products/create">Add Product</NavLink>
-              </Nav.Link>
-              <Nav.Link eventKey="7">
-                <NavLink to="/orders">Orders</NavLink>
-              </Nav.Link>
-              <Nav.Link eventKey="3">
-                <NavLink to="/basket">
-                  <FontAwesomeIcon icon={faShoppingCart} />{" "}
-                  {props.countCartItems ? (
-                    <span>{props.countCartItems}</span>
-                  ) : (
-                    ""
-                  )}
-                </NavLink>
-              </Nav.Link>
-              <Nav.Link eventKey="8">
-                <button onClick={logOutUser}>Logout</button>
-                <span>{user && user.name}</span>
-              </Nav.Link>
+              <NavLink to="/products/create" eventKey="6">
+                Add Product
+              </NavLink>
+              <NavLink to="/orders" eventKey="7">
+                Orders
+              </NavLink>
+              <NavLink to="/basket" eventKey="3" id="cart">
+                <FontAwesomeIcon icon={faShoppingCart} className="navicon" />{" "}
+                {props.countCartItems ? (
+                  <span>{props.countCartItems}</span>
+                ) : (
+                  ""
+                )}
+              </NavLink>
+              <FontAwesomeIcon
+                onClick={logOutUser}
+                icon={faSignOut}
+                className="my-auto mx-3 navicon"
+              />
+              {/* <span>{user && `Welcome, ${user.username}!`}</span> */}
             </>
           )}
         </Nav>

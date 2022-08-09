@@ -3,3 +3,37 @@
   max-height: 90px;
   margin-bottom: 30px;
 }
+
+.nav-bg {
+  background-color: deeppink;
+  text-decoration: none;
+}
+
+.nav-bg a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 0px;
+}
+
+.nav-bg a:hover {
+  color: black;
+  box-shadow: 0 2px 0 #000;
+}
+
+.navbar-brand a:hover {
+  text-decoration: none;
+  box-shadow: none;
+  color: black;
+}
+
+.navbar a {
+  margin: 15px;
+}
+
+.navicon:hover,
+#cart:hover {
+  color: yellow;
+  box-shadow: none;
+  cursor: pointer;
+}

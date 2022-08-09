@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
@@ -53,11 +54,15 @@ function AuthProviderWrapper(props) {
     localStorage.removeItem("authToken");
   };
 
+  const navigate = useNavigate();
+
   const logOutUser = () => {
     // To log out the user, remove the token
     removeToken();
     // and update the state variables
     authenticateUser();
+
+    navigate("/");
   };
 
   useEffect(() => {
