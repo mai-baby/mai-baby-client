@@ -101,9 +101,11 @@ function Basket(props) {
               </Row>
               <Row>
                 <div className="text-center p-1">
-                  <Button variant="primary" style={{ width: "200px" }}>
-                    Paypal
-                  </Button>
+                  <Link to="/payment">
+                    <Button variant="primary" style={{ width: "200px" }}>
+                      Pay with Stripe
+                    </Button>
+                  </Link>
                 </div>
               </Row>
             </>

@@ -10,8 +10,6 @@ import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
 function NavBar(props) {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
-  console.log(user);
-
   return (
     <Navbar className="px-5 nav-bg" sticky="top" expand="md" collapseOnSelect>
       <Navbar.Brand>

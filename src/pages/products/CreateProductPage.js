@@ -20,8 +20,6 @@ function CreateProductPage(props) {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
-    console.log(requestBody);
-
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/products`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },

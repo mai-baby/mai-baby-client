@@ -17,6 +17,7 @@ import ConfirmationPage from "./pages/cart/ConfirmationPage";
 import OrdersPage from "./pages/cart/OrdersPage";
 import OrderDetailPage from "./pages/cart/OrderDetailPage";
 import EditOrderPage from "./pages/cart/EditOrderPage";
+import PaymentPage from "./pages/cart/PaymentPage";
 // import IsPrivate from "./components/auth/IsPrivate";
 // import IsAnon from "./components/auth/IsAnon";
 
@@ -156,6 +157,7 @@ function App() {
         />
         <Route path="/orders/:orderId" element={<OrderDetailPage />} />
         <Route path="/orders/edit/:orderId" element={<EditOrderPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
     </div>
   );
