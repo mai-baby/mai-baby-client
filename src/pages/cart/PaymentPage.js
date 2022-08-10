@@ -1,31 +1,30 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import PaymentForm from "../../components/cart/PaymentForm";
-import StripeContainer from "../../components/cart/StripeContainer";
+import React, { useState, useEffect } from "react";
+import ProductDisplay from "../../components/cart/ProductDisplay";
 
 function PaymentPage() {
-  const [showItem, setShowItem] = useState(false);
-  return (
-    <div className="PaymentPage">
-      <h1>Basketball Fashion</h1>
-      {showItem ? (
-        <StripeContainer />
-      ) : (
-        <>
-          <h3>$10.00</h3>{" "}
-          <img
-            src="http://sc04.alicdn.com/kf/H6c90d253386a4d08a0f4b96b462b6cefh.jpg"
-            alt="sumting"
-            style={{ maxWidth: "300px", marginLeft: "120px" }}
-          />
-          <button onClick={() => setShowItem(true)}>
-            Purchase Jerseys Button
-          </button>
-        </>
-      )}
-    </div>
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
+
+  return message ? (
+    <section>
+      <p>{message}</p>
+    </section>
+  ) : (
+    <ProductDisplay />
   );
 }
 

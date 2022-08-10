@@ -56,6 +56,7 @@ function Basket(props) {
                   </span>
                 </div>
               </Col>
+              <hr className="my-4" />
             </Row>
           ))}
         </Col>
