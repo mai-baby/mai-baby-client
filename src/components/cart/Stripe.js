@@ -8,74 +8,57 @@ import { Link } from "react-router-dom";
 function Basket(props) {
   const navigate = useNavigate();
 
+  const {
+    products,
+    cartItems,
+    totalPrice,
+    onAdd,
+    onRemove,
+    shippingPrice,
+    itemsPrice,
+    setCartItems,
+  } = props;
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = {
-      line_items: [
-        {
-          price_data: {
-            currency: "EUR",
-            product_data: {
-              name: "MJ Jersey",
-            },
-            unit_amount: 20000, // price, how much to charge
-            // adjustable_quantity: enabled,
+
+    let lineItems = cartItems.map((lineItem) => {
+      return {
+        price_data: {
+          currency: "EUR",
+          product_data: {
+            name: lineItem.title,
           },
-          quantity: 1,
+          unit_amount: lineItem.price * 100,
         },
-        {
-          price_data: {
-            currency: "EUR",
-            product_data: {
-              name: "Kobe AD Shoes",
-            },
-            unit_amount: 18000, // price, how much to charge
-            // adjustable_quantity: enabled,
-          },
-          quantity: 2,
-        },
-      ],
+        quantity: lineItem.quantity,
+      };
+    });
+
+    let requestBody = {
+      line_items: lineItems,
+      mode: "payment",
+      success_url: `${window.location.origin}/payment?success=true`,
+      cancel_url: `${window.location.origin}/payment?canceled=true`,
     };
-
-    // let cartItems;
-
-    // let lineItems = cartItems.map((lineItem) => {
-    //   return {
-    //     price_data: {
-    //       currency: "EUR",
-    //       product_data: {
-    //         name: lineItem.title,
-    //       },
-    //       unit_amount: lineItem.price * 100,
-    //     },
-    //     quantity: 1,
-    //   };
-    // });
-
-    // let reqBody = { lineItems };
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
-
-    // axios.post(url, body, config)
 
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/create-checkout-session`,
         requestBody,
         {
-          // headers: { Authorization: `Bearer ${storedToken}` },
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
           },
         }
       )
       .then((resultJSON) => {
         // props.setCartItems([]);
-        console.log(resultJSON);
         window.location.href = resultJSON.data.url;
-        console.log("redirect successful!");
-        // navigate(`/confirmation`);
       })
       .catch((error) => {
         console.log(error);

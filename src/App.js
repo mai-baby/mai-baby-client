@@ -18,8 +18,8 @@ import OrdersPage from "./pages/cart/OrdersPage";
 import OrderDetailPage from "./pages/cart/OrderDetailPage";
 import EditOrderPage from "./pages/cart/EditOrderPage";
 import PaymentPage from "./pages/cart/PaymentPage";
-// import IsPrivate from "./components/auth/IsPrivate";
-// import IsAnon from "./components/auth/IsAnon";
+import IsPrivate from "./components/auth/IsPrivate";
+import IsAnon from "./components/auth/IsAnon";
 
 function App() {
   // Shopping Cart Functions
@@ -121,43 +121,119 @@ function App() {
             />
           }
         />
-        <Route path="/products/create" element={<CreateProductPage />} />
+
+        <Route
+          path="/products/create"
+          element={
+            <IsPrivate>
+              <CreateProductPage />
+            </IsPrivate>
+          }
+        />
+
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
-        <Route path="/products/edit/:productId" element={<EditProductPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/products/edit/:productId"
+          element={
+            <IsPrivate>
+              <EditProductPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <IsAnon>
+              <RegisterPage />
+            </IsAnon>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LoginPage />
+            </IsAnon>
+          }
+        />
+
         <Route
           path="/basket"
           element={
-            <BasketPage
-              products={products}
-              cartItems={cartItems}
-              totalPrice={totalPrice}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              shippingPrice={shippingPrice}
-              itemsPrice={itemsPrice}
-            />
+            <IsPrivate>
+              <BasketPage
+                products={products}
+                cartItems={cartItems}
+                totalPrice={totalPrice}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                shippingPrice={shippingPrice}
+                itemsPrice={itemsPrice}
+              />
+            </IsPrivate>
           }
         />
+
         <Route
           path="/checkout"
           element={
-            <CheckoutPage
-              cartItems={cartItems}
-              totalPrice={totalPrice}
-              setCartItems={setCartItems}
-            />
+            <IsPrivate>
+              <CheckoutPage
+                cartItems={cartItems}
+                totalPrice={totalPrice}
+                setCartItems={setCartItems}
+              />
+            </IsPrivate>
           }
         />
-        <Route path="/confirmation" element={<ConfirmationPage />} />
+
+        <Route
+          path="/confirmation"
+          element={
+            <IsPrivate>
+              <ConfirmationPage />
+            </IsPrivate>
+          }
+        />
+
         <Route
           path="/orders"
-          element={<OrdersPage orders={orders} getAllOrders={getAllOrders} />}
+          element={
+            <IsPrivate>
+              <OrdersPage orders={orders} getAllOrders={getAllOrders} />
+            </IsPrivate>
+          }
         />
-        <Route path="/orders/:orderId" element={<OrderDetailPage />} />
-        <Route path="/orders/edit/:orderId" element={<EditOrderPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
+
+        <Route
+          path="/orders/:orderId"
+          element={
+            <IsPrivate>
+              <OrderDetailPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/orders/edit/:orderId"
+          element={
+            <IsPrivate>
+              <EditOrderPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/payment"
+          element={
+            <IsPrivate>
+              <PaymentPage />
+            </IsPrivate>
+          }
+        />
       </Routes>
     </div>
   );

@@ -31,10 +31,10 @@ function NavBar(props) {
 
           {!isLoggedIn && (
             <>
-              <NavLink to="/register" eventKey="4">
+              <NavLink to="/register" eventKey="3">
                 Sign Up
               </NavLink>
-              <NavLink to="/login" eventKey="5">
+              <NavLink to="/login" eventKey="4">
                 Login
               </NavLink>
             </>
@@ -42,13 +42,13 @@ function NavBar(props) {
 
           {isLoggedIn && (
             <>
-              <NavLink to="/products/create" eventKey="6">
+              <NavLink to="/products/create" eventKey="5">
                 Add Product
               </NavLink>
-              <NavLink to="/orders" eventKey="7">
+              <NavLink to="/orders" eventKey="6">
                 Orders
               </NavLink>
-              <NavLink to="/basket" eventKey="8" id="cart">
+              <NavLink to="/basket" eventKey="7" id="cart">
                 <FontAwesomeIcon icon={faShoppingCart} className="navicon" />{" "}
                 {props.countCartItems ? (
                   <span>{props.countCartItems}</span>
@@ -60,6 +60,7 @@ function NavBar(props) {
                 onClick={logOutUser}
                 icon={faSignOut}
                 className="my-auto mx-3 navicon"
+                eventKey="8"
               />
               {/* <span>{user && `Welcome, ${user.username}!`}</span> */}
             </>

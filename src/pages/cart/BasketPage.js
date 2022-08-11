@@ -1,15 +1,3 @@
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  Breadcrumb,
-  Image,
-} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import { Link } from "react-router-dom";
 import Basket from "../../components/cart/Basket";
 
 function BasketPage(props) {
@@ -21,6 +9,7 @@ function BasketPage(props) {
     onRemove,
     shippingPrice,
     itemsPrice,
+    setCartItems,
   } = props;
   return (
     <Basket
@@ -31,6 +20,7 @@ function BasketPage(props) {
       onRemove={onRemove}
       shippingPrice={shippingPrice}
       itemsPrice={itemsPrice}
+      setCartItems={setCartItems}
     />
   );
 }

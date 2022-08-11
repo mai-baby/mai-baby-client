@@ -5,6 +5,17 @@ import { Link } from "react-router-dom";
 import Stripe from "./Stripe";
 
 function Basket(props) {
+  const {
+    products,
+    cartItems,
+    totalPrice,
+    onAdd,
+    onRemove,
+    shippingPrice,
+    itemsPrice,
+    setCartItems,
+  } = props;
+
   return (
     <aside className="m-4">
       <Row>
@@ -94,7 +105,16 @@ function Basket(props) {
                 </div>
               </Row>
               <Row>
-                <Stripe />
+                <Stripe
+                  products={products}
+                  cartItems={cartItems}
+                  totalPrice={totalPrice}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                  shippingPrice={shippingPrice}
+                  itemsPrice={itemsPrice}
+                  setCartItems={setCartItems}
+                />
               </Row>
             </>
           )}
