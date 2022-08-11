@@ -45,13 +45,37 @@
 
 .navicon:hover,
 #cart:hover {
-  color: yellow;
+  color: darkblue;
   box-shadow: none;
   cursor: pointer;
 }
 
 #logout:hover {
-  color: coral;
+  color: red;
   box-shadow: none;
   cursor: pointer;
+}
+
+.pricetag,
+.product-title {
+  color: darkorange;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}
+
+.product-title {
+  color: dodgerblue;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}
+
+.description,
+.brand {
+  color: darkorange;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}
+
+.product-text {
+  font-weight: bold;
 }

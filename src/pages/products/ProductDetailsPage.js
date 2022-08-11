@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-import { Image } from "react-bootstrap";
+import { Row, Col, Button, Alert, Image, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductDetailsPage(props) {
+  const { onAdd } = props;
+
   const [product, setProduct] = useState(null);
 
   const { productId } = useParams();
@@ -41,30 +43,55 @@ function ProductDetailsPage(props) {
   };
 
   return (
-    <div className="ProductDetails">
+    <div className="ProductDetails d-flex m-4 justify-content-center">
       {product && (
-        <>
-          <Image src={product.imageURL} alt="{product.title}" fluid />
-          <h1>{product.title}</h1>
-          <p>Price: {product.price}€</p>
-          <p>Description: {product.shortDescription}</p>
-          <p>Description: {product.longDescription}</p>
-          <p>Brand: {product.brand}</p>
-        </>
+        <Card className="m-4" style={{ width: "80vw" }}>
+          <Row>
+            <Col className="col-4 d-flex justify-content-center align-items-center">
+              <Card.Img
+                src={product.imageURL}
+                alt="{product.title}"
+                style={{ maxWidth: "300px" }}
+                fluid
+              />
+            </Col>
+            <Col className="col-8">
+              <Card.Body>
+                <h1 className="product-title">{product.title}</h1>
+                <h1 className="pricetag">{product.price}€</h1>
+                <br />
+                <h4 className="description">Description</h4>
+                <p className="product-text">{product.shortDescription}</p>
+                {/* <Card.Text>Description: {product.longDescription}</Card.Text> */}
+                <h4 className="brand">Brand</h4>
+                <p className="product-text">{product.brand}</p>
+                <Button variant="warning" onClick={() => onAdd(product)}>
+                  Add to Cart
+                </Button>
+                <Link to="/products">
+                  <Button variant="primary" className="m-4">
+                    Back to products
+                  </Button>
+                </Link>
+                <Link to={`/products/edit/${productId}`}>
+                  <Button variant="outline-primary" className="m-4">
+                    Edit
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline-danger"
+                  className="m-4"
+                  onClick={() => {
+                    deleteProduct(productId);
+                  }}
+                >
+                  Delete
+                </Button>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
       )}
-      <Link to={`/products/edit/${productId}`}>
-        <button>Edit</button>
-      </Link>
-      <Link to="/products">
-        <button>Back to products</button>
-      </Link>
-      <button
-        onClick={() => {
-          deleteProduct(productId);
-        }}
-      >
-        Delete
-      </button>
     </div>
   );
 }

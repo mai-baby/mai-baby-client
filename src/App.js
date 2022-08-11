@@ -131,7 +131,10 @@ function App() {
           }
         />
 
-        <Route path="/products/:productId" element={<ProductDetailsPage />} />
+        <Route
+          path="/products/:productId"
+          element={<ProductDetailsPage onAdd={onAdd} />}
+        />
 
         <Route
           path="/products/edit/:productId"
