@@ -64,11 +64,16 @@ function Basket(props) {
         `${process.env.REACT_APP_API_URL}/create-checkout-session`,
         requestBody,
         {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          // headers: { Authorization: `Bearer ${storedToken}` },
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       )
-      .then((session) => {
+      .then((resultJSON) => {
         // props.setCartItems([]);
+        console.log(resultJSON);
+        window.location.href = resultJSON.data.url;
         console.log("redirect successful!");
         // navigate(`/confirmation`);
       })
@@ -80,11 +85,11 @@ function Basket(props) {
 
   return (
     <div className="text-center p-1">
-      {/* <Form onSubmit={handleFormSubmit}> */}
-      <Form
+      <Form onSubmit={handleFormSubmit}>
+        {/* <Form
         action={process.env.REACT_APP_API_URL + "/create-checkout-session"}
         method="POST"
-      >
+      > */}
         <Button variant="primary" style={{ width: "200px" }} type="submit">
           Pay with Stripe
         </Button>
