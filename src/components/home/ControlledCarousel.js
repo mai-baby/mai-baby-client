@@ -40,8 +40,12 @@ function ControlledCarousel(props) {
             />
             <div className="carousel-bg">
               <Carousel.Caption>
-                <h3>Discover the whole Collection!</h3>
-                <p>Prices starting from 10€</p>
+                <h3 className="product-title">
+                  Discover the whole Collection!
+                </h3>
+                <p style={{ fontSize: "2rem" }} className="pricetag">
+                  Prices starting from 10€
+                </p>
               </Carousel.Caption>
             </div>
           </Link>
@@ -59,8 +63,10 @@ function ControlledCarousel(props) {
                 />
                 <div className="carousel-bg">
                   <Carousel.Caption>
-                    <h3> {product.title}</h3>
-                    <p>{product.price}€</p>
+                    <h3 className="product-title"> {product.title}</h3>
+                    <p style={{ fontSize: "2rem" }} className="pricetag">
+                      {product.price}€
+                    </p>
                   </Carousel.Caption>
                 </div>
               </Link>

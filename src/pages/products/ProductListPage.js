@@ -17,7 +17,7 @@ function ProductListPage(props) {
   return (
     <div className="ProductListPage">
       <h1 className="text-center m-2">
-        Discover the Brand New NBA Toddlers Collection!
+        Discover the Brand New NBA Kids Collection!
       </h1>
       <hr />
       <Row className="px-4">
@@ -32,16 +32,30 @@ function ProductListPage(props) {
               style={{ border: "none" }}
               key={product._id}
             >
-              <Card className="p-2" style={{ border: "none" }}>
+              <Card className="p-2">
                 <Link className="text-center" to={`/products/${product._id}`}>
                   <Card.Img src={product.imageURL} />
-                  <Card.Title>{product.title}</Card.Title>
                 </Link>
-                <Card.Text className="text-center">{product.price}€</Card.Text>
+                <h3
+                  style={{ fontSize: "2.5rem" }}
+                  className="pricetag mt-2 mb-1 ms-auto px-2"
+                >
+                  {product.price}€
+                </h3>
+                <h3 className="px-3">{product.title}</h3>
+                <div className="text-center">
+                  <Link className="text-center" to={`/products/${product._id}`}>
+                    <Button>Details</Button>
+                  </Link>
+                  <Button
+                    variant="outline-warning"
+                    className="m-3"
+                    onClick={() => onAdd(product)}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
               </Card>
-              <div className="text-center">
-                <Button onClick={() => onAdd(product)}>Add to Cart</Button>
-              </div>
             </Col>
           );
         })}
