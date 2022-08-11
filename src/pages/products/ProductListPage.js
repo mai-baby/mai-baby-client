@@ -47,7 +47,15 @@ function ProductListPage(props) {
                   {product.price}€
                 </h3>
                 <Row className="h-100">
-                  <h3 className="px-3">{product.title}</h3>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                    to={`/products/${product._id}`}
+                  >
+                    <h3 className="px-3">{product.title}</h3>
+                  </Link>
                 </Row>
                 <Row className="text-center d-inline my-3">
                   <Link className="text-center" to={`/products/${product._id}`}>
