@@ -6,18 +6,17 @@ import { Navigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function IsPrivate({ children }) {
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
+function IsAdmin({ children }) {
+  const { isLoading, user } = useContext(AuthContext);
 
-  // UPDATE set spinner!!!
   if (isLoading) return <Spinner animation="border" variant="primary" />;
 
-  if (!isLoggedIn) {
+  if (user?.isAdmin) {
     // If the user is not logged in, UPDATE send error message!!!
-    return <Navigate to="/login" />;
-  } else {
     return children;
+  } else {
+    return <Navigate to="/products" />;
   }
 }
 
-export default IsPrivate;
+export default IsAdmin;

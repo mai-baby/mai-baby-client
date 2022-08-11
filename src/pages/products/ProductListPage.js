@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/auth.context";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,6 +10,8 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductListPage(props) {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
   const { onAdd } = props;
 
   useEffect(() => {
@@ -47,13 +51,15 @@ function ProductListPage(props) {
                   <Link className="text-center" to={`/products/${product._id}`}>
                     <Button>Details</Button>
                   </Link>
-                  <Button
-                    variant="outline-warning"
-                    className="m-3"
-                    onClick={() => onAdd(product)}
-                  >
-                    Add to Cart
-                  </Button>
+                  {isLoggedIn && (
+                    <Button
+                      variant="outline-warning"
+                      className="m-3"
+                      onClick={() => onAdd(product)}
+                    >
+                      Add to Cart
+                    </Button>
+                  )}
                 </div>
               </Card>
             </Col>

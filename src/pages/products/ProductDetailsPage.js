@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-import { Row, Col, Button, Alert, Image, Card } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductDetailsPage(props) {
+  const { isLoggedIn, user } = useContext(AuthContext);
+
   const { onAdd } = props;
 
   const [product, setProduct] = useState(null);
@@ -52,7 +55,7 @@ function ProductDetailsPage(props) {
                 src={product.imageURL}
                 alt="{product.title}"
                 style={{ maxWidth: "300px" }}
-                fluid
+                fluid="true"
               />
             </Col>
             <Col className="col-8">
@@ -65,28 +68,45 @@ function ProductDetailsPage(props) {
                 {/* <Card.Text>Description: {product.longDescription}</Card.Text> */}
                 <h4 className="brand">Brand</h4>
                 <p className="product-text">{product.brand}</p>
-                <Button variant="warning" onClick={() => onAdd(product)}>
-                  Add to Cart
-                </Button>
-                <Link to="/products">
-                  <Button variant="primary" className="m-4">
-                    Back to products
-                  </Button>
-                </Link>
-                <Link to={`/products/edit/${productId}`}>
-                  <Button variant="outline-primary" className="m-4">
-                    Edit
-                  </Button>
-                </Link>
-                <Button
-                  variant="outline-danger"
-                  className="m-4"
-                  onClick={() => {
-                    deleteProduct(productId);
-                  }}
-                >
-                  Delete
-                </Button>
+                {isLoggedIn && (
+                  <>
+                    <Button variant="warning" onClick={() => onAdd(product)}>
+                      Add to Cart
+                    </Button>
+                    <Link to="/products">
+                      <Button variant="primary" className="m-4">
+                        Back to products
+                      </Button>
+                    </Link>
+                  </>
+                )}
+
+                {user?.isAdmin && (
+                  <>
+                    <Link to={`/products/edit/${productId}`}>
+                      <Button variant="outline-primary" className="m-4">
+                        Edit
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outline-danger"
+                      className="m-4"
+                      onClick={() => {
+                        deleteProduct(productId);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </>
+                )}
+
+                {!isLoggedIn && (
+                  <>
+                    <Link to="/login">
+                      <Button variant="warning">Add to Cart</Button>
+                    </Link>
+                  </>
+                )}
               </Card.Body>
             </Col>
           </Row>

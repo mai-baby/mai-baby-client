@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ProductDisplay from "../../components/cart/ProductDisplay";
+import BasketPage from "./BasketPage";
 
 function PaymentPage() {
   const [message, setMessage] = useState("");
@@ -24,7 +24,7 @@ function PaymentPage() {
       <p>{message}</p>
     </section>
   ) : (
-    <ProductDisplay />
+    <BasketPage />
   );
 }
 

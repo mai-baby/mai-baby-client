@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
@@ -15,36 +14,23 @@ function NavBar(props) {
         <NavLink to="/">Mai-Baby</NavLink>
       </Navbar.Brand>
 
-      <Navbar.Toggle eventKey="1" />
+      <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto">
-          <NavLink to="/" eventKey="1">
-            Home
-          </NavLink>
-          <NavLink to="/products" eventKey="1">
-            Products
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/products">Products</NavLink>
 
           {!isLoggedIn && (
             <>
-              <NavLink to="/register" eventKey="1">
-                Sign Up
-              </NavLink>
-              <NavLink to="/login" eventKey="1">
-                Login
-              </NavLink>
+              <NavLink to="/register">Sign Up</NavLink>
+              <NavLink to="/login">Login</NavLink>
             </>
           )}
 
           {isLoggedIn && (
             <>
-              <NavLink to="/products/create" eventKey="1">
-                Add Product
-              </NavLink>
-              <NavLink to="/orders" eventKey="1">
-                Orders
-              </NavLink>
-              <NavLink to="/basket" eventKey="1" id="cart">
+              <NavLink to="/orders">Orders</NavLink>
+              <NavLink to="/basket" id="cart">
                 <FontAwesomeIcon icon={faShoppingCart} className="navicon" />{" "}
                 {props.countCartItems ? (
                   <span>{props.countCartItems}</span>
@@ -57,10 +43,13 @@ function NavBar(props) {
                 onClick={logOutUser}
                 icon={faSignOut}
                 className="my-auto mx-3 navicon"
-                eventKey="1"
               />
               {/* <span>{user && `Welcome, ${user.username}!`}</span> */}
             </>
+          )}
+
+          {user?.isAdmin && (
+            <NavLink to="/products/create">Add Product</NavLink>
           )}
         </Nav>
       </Navbar.Collapse>

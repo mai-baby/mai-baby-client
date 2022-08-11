@@ -58,7 +58,7 @@ function RegisterPage(props) {
           value={username}
           onChange={handleUsername}
         />
-
+        {/* COMMENT conditional rendering with true or false and then show the spinner, put a spinner instead of button with ternary, true/false */}
         <button type="submit">Register</button>
       </form>
 

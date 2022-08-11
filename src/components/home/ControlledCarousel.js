@@ -36,7 +36,7 @@ function ControlledCarousel(props) {
               alt="Kid's Collection"
               className="d-block mx-auto"
               style={{ width: "100vw", maxWidth: "500px" }}
-              fluid
+              fluid="true"
             />
             <div className="carousel-bg">
               <Carousel.Caption>
@@ -59,7 +59,7 @@ function ControlledCarousel(props) {
                   alt={product.title}
                   className="d-block mx-auto"
                   style={{ width: "100vw", maxWidth: "500px" }}
-                  fluid
+                  fluid="true"
                 />
                 <div className="carousel-bg">
                   <Carousel.Caption>

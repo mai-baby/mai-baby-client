@@ -20,6 +20,7 @@ import EditOrderPage from "./pages/cart/EditOrderPage";
 import PaymentPage from "./pages/cart/PaymentPage";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
+import IsAdmin from "./components/auth/IsAdmin";
 
 function App() {
   // Shopping Cart Functions
@@ -125,9 +126,9 @@ function App() {
         <Route
           path="/products/create"
           element={
-            <IsPrivate>
+            <IsAdmin>
               <CreateProductPage />
-            </IsPrivate>
+            </IsAdmin>
           }
         />
 
@@ -139,9 +140,9 @@ function App() {
         <Route
           path="/products/edit/:productId"
           element={
-            <IsPrivate>
+            <IsAdmin>
               <EditProductPage />
-            </IsPrivate>
+            </IsAdmin>
           }
         />
 
