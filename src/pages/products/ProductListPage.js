@@ -36,7 +36,7 @@ function ProductListPage(props) {
               style={{ border: "none" }}
               key={product._id}
             >
-              <Card className="p-2">
+              <Card className="p-2 h-100 my-2">
                 <Link className="text-center" to={`/products/${product._id}`}>
                   <Card.Img src={product.imageURL} />
                 </Link>
@@ -46,21 +46,25 @@ function ProductListPage(props) {
                 >
                   {product.price}€
                 </h3>
-                <h3 className="px-3">{product.title}</h3>
-                <div className="text-center">
+                <Row className="h-100">
+                  <h3 className="px-3">{product.title}</h3>
+                </Row>
+                <Row className="text-center d-inline my-3">
                   <Link className="text-center" to={`/products/${product._id}`}>
                     <Button>Details</Button>
                   </Link>
+
                   {isLoggedIn && (
                     <Button
+                      style={{ width: "120px" }}
                       variant="outline-warning"
-                      className="m-3"
+                      className="mx-2"
                       onClick={() => onAdd(product)}
                     >
                       Add to Cart
                     </Button>
                   )}
-                </div>
+                </Row>
               </Card>
             </Col>
           );
