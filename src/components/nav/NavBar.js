@@ -48,7 +48,7 @@ function NavBar(props) {
               <NavLink to="/orders" eventKey="7">
                 Orders
               </NavLink>
-              <NavLink to="/basket" eventKey="3" id="cart">
+              <NavLink to="/basket" eventKey="8" id="cart">
                 <FontAwesomeIcon icon={faShoppingCart} className="navicon" />{" "}
                 {props.countCartItems ? (
                   <span>{props.countCartItems}</span>
