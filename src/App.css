@@ -37,6 +37,10 @@
 
 .navbar-brand a {
   font-family: cursive;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 2px 1px black;
+  ;
 }
 
 .navicon:hover,
@@ -47,7 +51,7 @@
 }
 
 #logout:hover {
-  color: red;
+  color: coral;
   box-shadow: none;
   cursor: pointer;
 }
