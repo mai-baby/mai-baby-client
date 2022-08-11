@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -9,32 +9,49 @@ import { faShoppingCart, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar(props) {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar className="px-5 nav-bg" sticky="top" expand="md" collapseOnSelect>
+    <Navbar
+      className="px-5 nav-bg"
+      sticky="top"
+      expand="lg"
+      expanded={expanded}
+    >
       <Navbar.Brand>
-        <NavLink to="/">
-          {/* <img src="/logo512.png" alt="brand logo" style={{ width: "40px" }} /> */}
-          Mai Baby
-        </NavLink>
+        <NavLink to="/">Mai-Baby</NavLink>
       </Navbar.Brand>
 
-      <Navbar.Toggle />
+      <Navbar.Toggle
+        onClick={() => setExpanded(expanded ? false : "expanded")}
+      />
       <Navbar.Collapse>
         <Nav className="ms-auto">
-          <NavLink to="/" eventKey="1">
+          <NavLink
+            to="/"
+            onClick={() => setExpanded(expanded ? false : "expanded")}
+          >
             Home
           </NavLink>
-          <NavLink to="/products" eventKey="2">
+          <NavLink
+            to="/products"
+            onClick={() => setExpanded(expanded ? false : "expanded")}
+          >
             Products
           </NavLink>
 
           {!isLoggedIn && (
             <>
-              <NavLink to="/register" eventKey="3">
+              <NavLink
+                to="/register"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
+              >
                 Sign Up
               </NavLink>
-              <NavLink to="/login" eventKey="4">
+              <NavLink
+                to="/login"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
+              >
                 Login
               </NavLink>
             </>
@@ -42,13 +59,23 @@ function NavBar(props) {
 
           {isLoggedIn && (
             <>
-              <NavLink to="/products/create" eventKey="5">
+              <NavLink
+                to="/products/create"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
+              >
                 Add Product
               </NavLink>
-              <NavLink to="/orders" eventKey="6">
+              <NavLink
+                to="/orders"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
+              >
                 Orders
               </NavLink>
-              <NavLink to="/basket" eventKey="7" id="cart">
+              <NavLink
+                to="/basket"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
+                id="cart"
+              >
                 <FontAwesomeIcon icon={faShoppingCart} className="navicon" />{" "}
                 {props.countCartItems ? (
                   <span>{props.countCartItems}</span>
@@ -57,10 +84,11 @@ function NavBar(props) {
                 )}
               </NavLink>
               <FontAwesomeIcon
+                id="logout"
                 onClick={logOutUser}
                 icon={faSignOut}
                 className="my-auto mx-3 navicon"
-                eventKey="8"
+                onClick={() => setExpanded(expanded ? false : "expanded")}
               />
               {/* <span>{user && `Welcome, ${user.username}!`}</span> */}
             </>

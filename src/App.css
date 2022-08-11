@@ -5,7 +5,7 @@
 }
 
 .nav-bg {
-  background-color: deeppink;
+  background-color: dodgerblue;
   text-decoration: none;
 }
 
@@ -17,23 +17,37 @@
 }
 
 .nav-bg a:hover {
-  color: black;
-  box-shadow: 0 2px 0 #000;
+  color: white;
+  box-shadow: 0 3px 0 white;
 }
 
 .navbar-brand a:hover {
   text-decoration: none;
   box-shadow: none;
-  color: black;
+  color: white;
 }
 
-.navbar a {
+.navbar a,
+#logout {
   margin: 15px;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
+.navbar-brand a {
+  font-family: cursive;
 }
 
 .navicon:hover,
 #cart:hover {
   color: yellow;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#logout:hover {
+  color: red;
   box-shadow: none;
   cursor: pointer;
 }
