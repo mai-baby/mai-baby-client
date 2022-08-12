@@ -29,9 +29,13 @@ function OrderDetailsPage(props) {
   }, []);
 
   const deleteItemFromOrder = (itemId) => {
+    const storedToken = localStorage.getItem("authToken");
     axios
       .put(
-        process.env.REACT_APP_API_URL + "/api/orders/" + orderId + "/" + itemId
+        process.env.REACT_APP_API_URL + "/api/orders/" + orderId + "/" + itemId,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
       )
       .then(() => {
         getOrder();
@@ -43,8 +47,11 @@ function OrderDetailsPage(props) {
   };
 
   const deleteOrder = (orderId) => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .delete(process.env.REACT_APP_API_URL + "/api/orders/" + orderId)
+      .delete(process.env.REACT_APP_API_URL + "/api/orders/" + orderId, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         navigate(`/orders`);
       })

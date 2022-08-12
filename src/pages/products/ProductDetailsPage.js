@@ -34,8 +34,11 @@ function ProductDetailsPage(props) {
   }, []);
 
   const deleteProduct = (productId) => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .delete(process.env.REACT_APP_API_URL + "/api/products/" + productId)
+      .delete(process.env.REACT_APP_API_URL + "/api/products/" + productId, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         navigate(`/products`);
       })
