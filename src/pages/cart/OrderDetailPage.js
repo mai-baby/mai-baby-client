@@ -33,6 +33,7 @@ function OrderDetailsPage(props) {
     axios
       .put(
         process.env.REACT_APP_API_URL + "/api/orders/" + orderId + "/" + itemId,
+        undefined,
         {
           headers: { Authorization: `Bearer ${storedToken}` },
         }
