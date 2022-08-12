@@ -12,7 +12,6 @@ function LoginPage(props) {
 
   const navigate = useNavigate();
 
-  /*  UPDATE - get authenticateUser from the context */
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleUsername = (e) => setUsername(e.target.value);
@@ -25,20 +24,15 @@ function LoginPage(props) {
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/login`, requestBody)
       .then((response) => {
-        // Save the token in the localStorage.
         storeToken(response.data.authToken);
-
-        // Verify the token by sending a request
-        // to the server's JWT validation endpoint.
         authenticateUser();
         navigate("/");
       })
       .catch((error) => {
-        const errorDescription = error.response.data;
+        const errorDescription = error.response.data.errorMessage;
         setErrorMessage(errorDescription);
       });
   };
-
   return (
     <div className="LoginPage wrapper">
       <form id="formContent" onSubmit={handleLoginSubmit}>
@@ -59,12 +53,11 @@ function LoginPage(props) {
           onChange={handlePassword}
           placeholder="Password"
         />
-
+        {errorMessage && <p className="error-message">Wrong credentials!</p>}
         <button id="login-button" type="submit">
           Login
         </button>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div id="formFooter">
         <p>Don't have an account yet?</p>

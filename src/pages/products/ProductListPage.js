@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 import Row from "react-bootstrap/Row";
@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductListPage(props) {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const { onAdd } = props;
 

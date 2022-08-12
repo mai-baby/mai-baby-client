@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
+import { Row, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function CreateProductPage(props) {
@@ -10,6 +10,7 @@ function CreateProductPage(props) {
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
@@ -26,6 +27,10 @@ function CreateProductPage(props) {
       })
       .then(() => {
         navigate(`/products`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.errorMessage;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -89,6 +94,7 @@ function CreateProductPage(props) {
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
         </Row>
+        {errorMessage && <p className="error-message">Wrong credentials!</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             List Product

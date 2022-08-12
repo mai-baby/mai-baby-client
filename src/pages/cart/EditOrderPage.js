@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Row, Col, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
+import { Row, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function EditOrderPage(props) {
@@ -11,6 +11,8 @@ function EditOrderPage(props) {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const { orderId } = useParams();
   const navigate = useNavigate();
@@ -49,6 +51,10 @@ function EditOrderPage(props) {
       )
       .then(() => {
         navigate(`/orders/${orderId}`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.errorMessage;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -65,9 +71,7 @@ function EditOrderPage(props) {
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
             />
-            {/* <Form.Text>Don't share your email!</Form.Text> */}
           </Form.Group>
-
           <Form.Group controlId="formStreet">
             <Form.Label>Street</Form.Label>
             <Form.Control
@@ -76,9 +80,7 @@ function EditOrderPage(props) {
               value={street}
               onChange={(e) => setStreet(e.target.value)}
             />
-            {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
-
           <Form.Group controlId="formPostal">
             <Form.Label>Postal</Form.Label>
             <Form.Control
@@ -87,9 +89,7 @@ function EditOrderPage(props) {
               value={postal}
               onChange={(e) => setPostal(e.target.value)}
             />
-            {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
-
           <Form.Group controlId="formCity">
             <Form.Label>City</Form.Label>
             <Form.Control
@@ -98,9 +98,7 @@ function EditOrderPage(props) {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-            {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
-
           <Form.Group controlId="formState">
             <Form.Label>State</Form.Label>
             <Form.Control
@@ -109,7 +107,6 @@ function EditOrderPage(props) {
               value={state}
               onChange={(e) => setState(e.target.value)}
             />
-            {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
           <Form.Group controlId="formCountry">
             <Form.Label>Country</Form.Label>
@@ -119,9 +116,9 @@ function EditOrderPage(props) {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             />
-            {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
         </Row>
+        {errorMessage && <p className="error-message">Wrong credentials!</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             Change Details

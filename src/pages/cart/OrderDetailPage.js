@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-import { Image, Row, Col, Button, Card } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function OrderDetailsPage(props) {
@@ -12,7 +12,6 @@ function OrderDetailsPage(props) {
   const navigate = useNavigate();
 
   const getOrder = () => {
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
     axios
       .get(process.env.REACT_APP_API_URL + "/api/orders/" + orderId, {
@@ -118,7 +117,6 @@ function OrderDetailsPage(props) {
       </Row>
 
       <Row className="px-4">
-        {/* Add Loading Spinner */}
         {order?.products.map((item) => {
           return (
             <div>

@@ -17,7 +17,6 @@ function ProductDetailsPage(props) {
   const navigate = useNavigate();
 
   const getProduct = () => {
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/products/${productId}`, {
@@ -73,14 +72,21 @@ function ProductDetailsPage(props) {
                     <Button variant="warning" onClick={() => onAdd(product)}>
                       Add to Cart
                     </Button>
-                    <Link to="/products">
-                      <Button variant="primary" className="m-4">
-                        Back to products
-                      </Button>
-                    </Link>
                   </>
                 )}
 
+                {!isLoggedIn && (
+                  <>
+                    <Link to="/login">
+                      <Button variant="warning">Add to Cart</Button>
+                    </Link>
+                  </>
+                )}
+                <Link to="/products">
+                  <Button variant="primary" className="m-4">
+                    Back to products
+                  </Button>
+                </Link>
                 {user?.isAdmin && (
                   <>
                     <Link to={`/products/edit/${productId}`}>
@@ -97,14 +103,6 @@ function ProductDetailsPage(props) {
                     >
                       Delete
                     </Button>
-                  </>
-                )}
-
-                {!isLoggedIn && (
-                  <>
-                    <Link to="/login">
-                      <Button variant="warning">Add to Cart</Button>
-                    </Link>
                   </>
                 )}
               </Card.Body>

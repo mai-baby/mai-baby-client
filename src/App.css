@@ -80,26 +80,18 @@
   font-weight: bold;
 }
 
+.error-message {
+  color: red;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.spinner {
+  display: block;
+  margin: auto 30px;
+}
+
 /* Login Page Styling */
-
-a {
-  color: #92badd;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-h2 {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  display: inline-block;
-  margin: 40px 8px 10px 8px;
-  color: #cccccc;
-}
-
-
 
 /* STRUCTURE */
 
@@ -370,7 +362,7 @@ h2.active {
 
 /* OTHERS */
 
-*:focus {
+:focus {
   outline: none;
 }
 

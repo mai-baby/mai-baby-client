@@ -2,7 +2,6 @@ import Basket from "../../components/cart/Basket";
 
 function BasketPage(props) {
   const {
-    products,
     cartItems,
     totalPrice,
     onAdd,
@@ -13,7 +12,6 @@ function BasketPage(props) {
   } = props;
   return (
     <Basket
-      products={products}
       cartItems={cartItems}
       totalPrice={totalPrice}
       onAdd={onAdd}

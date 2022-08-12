@@ -20,10 +20,6 @@ function OrdersPage(props) {
       <hr />
       <Row className="px-4 ">
         <Col
-          // xs={12}
-          // sm={6}
-          // md={4}
-          // lg={4}
           className="ProductCard card col-12 mx-auto"
           style={{ border: "none", maxWidth: "600px" }}
         >

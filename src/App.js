@@ -31,7 +31,7 @@ function App() {
       accumulator + currentValue.price * currentValue.quantity,
     0
   );
-  const shippingPrice = itemsPrice > 50 ? 0 : 5; // free shipping from 50€
+  const shippingPrice = itemsPrice > 50 ? 0 : 5;
   const totalPrice = itemsPrice + shippingPrice;
 
   const onAdd = (product) => {
@@ -90,9 +90,7 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   const getAllOrders = () => {
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
-
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -169,13 +167,13 @@ function App() {
           element={
             <IsPrivate>
               <BasketPage
-                products={products}
                 cartItems={cartItems}
                 totalPrice={totalPrice}
                 onAdd={onAdd}
                 onRemove={onRemove}
                 shippingPrice={shippingPrice}
                 itemsPrice={itemsPrice}
+                setCartItems={setCartItems}
               />
             </IsPrivate>
           }

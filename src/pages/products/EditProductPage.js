@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Row, Col, Button, Alert, Breadcrumb, Form } from "react-bootstrap";
+import { Row, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function EditProductPage(props) {
@@ -10,6 +10,8 @@ function EditProductPage(props) {
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState("");
   const [imageURL, setImageURL] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -53,6 +55,10 @@ function EditProductPage(props) {
         // Once the request is resolved successfully and the product
         // is updated we navigate back to the details page
         navigate(`/products/${productId}`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.errorMessage;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -116,6 +122,7 @@ function EditProductPage(props) {
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
         </Row>
+        {errorMessage && <p className="error-message">Wrong credentials!</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             Update Product

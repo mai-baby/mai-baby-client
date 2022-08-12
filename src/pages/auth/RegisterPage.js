@@ -48,7 +48,7 @@ function RegisterPage(props) {
         />
         <input
           id="register"
-          type="email"
+          type="text"
           name="email"
           value={email}
           placeholder="email@address.com"
@@ -63,13 +63,12 @@ function RegisterPage(props) {
           placeholder="Password"
           onChange={handlePassword}
         />
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         {/* COMMENT conditional rendering with true or false and then show the spinner, put a spinner instead of button with ternary, true/false */}
         <button id="register-button" type="submit">
           Register
         </button>
       </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div id="formFooter">
         <p>Already have account?</p>
