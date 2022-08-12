@@ -36,36 +36,45 @@ function RegisterPage(props) {
   };
 
   return (
-    <div className="RegisterPage">
-      <h1>Register</h1>
-
-      <form onSubmit={handleRegisterSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
+    <div className="RegisterPage wrapper">
+      <form id="formContent" onSubmit={handleRegisterSubmit}>
         <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <label>Name:</label>
-        <input
+          id="login"
           type="text"
           name="username"
           value={username}
+          placeholder="Username"
           onChange={handleUsername}
         />
+        <input
+          id="register"
+          type="email"
+          name="email"
+          value={email}
+          placeholder="email@address.com"
+          onChange={handleEmail}
+        />
+
+        <input
+          id="password"
+          type="password"
+          name="password"
+          value={password}
+          placeholder="Password"
+          onChange={handlePassword}
+        />
         {/* COMMENT conditional rendering with true or false and then show the spinner, put a spinner instead of button with ternary, true/false */}
-        <button type="submit">Register</button>
+        <button id="register-button" type="submit">
+          Register
+        </button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <div id="formFooter">
+        <p>Already have account?</p>
+        <Link to={"/login"}> Login</Link>
+      </div>
     </div>
   );
 }

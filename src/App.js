@@ -238,6 +238,12 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route
+          path="/:badrequest"
+          element={
+            <HomePage products={products} getAllProducts={getAllProducts} />
+          }
+        />
       </Routes>
     </div>
   );

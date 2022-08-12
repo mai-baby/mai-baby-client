@@ -40,32 +40,36 @@ function LoginPage(props) {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
-
-      <form onSubmit={handleLoginSubmit}>
-        <label>Username:</label>
+    <div className="LoginPage wrapper">
+      <form id="formContent" onSubmit={handleLoginSubmit}>
         <input
+          id="login"
           type="text"
           name="username"
           value={username}
           onChange={handleUsername}
+          placeholder="Username"
         />
 
-        <label>Password:</label>
         <input
+          id="password"
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
+          placeholder="Password"
         />
 
-        <button type="submit">Login</button>
+        <button id="login-button" type="submit">
+          Login
+        </button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <div id="formFooter">
+        <p>Don't have an account yet?</p>
+        <Link to={"/signup"}>Sign Up</Link>
+      </div>
     </div>
   );
 }

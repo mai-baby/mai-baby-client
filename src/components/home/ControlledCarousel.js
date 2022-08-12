@@ -19,9 +19,7 @@ function ControlledCarousel(props) {
 
   return (
     <>
-      <h1 className="text-center m-2">
-        Discover the Brand New NBA Toddlers Collection!
-      </h1>
+      <h1 className="text-center m-2">Welcome to Mai-Baby Online Shop!</h1>
       <hr />
       <Carousel
         activeIndex={index}
