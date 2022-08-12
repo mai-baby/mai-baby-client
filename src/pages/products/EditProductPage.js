@@ -17,7 +17,6 @@ function EditProductPage(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/products/${productId}`, {
@@ -36,13 +35,10 @@ function EditProductPage(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Create an object representing the body of the PUT request
     const requestBody = { title, shortDescription, price, brand, imageURL };
 
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
-    // Make a PUT request to update the product
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/api/products/${productId}`,
@@ -52,8 +48,6 @@ function EditProductPage(props) {
         }
       )
       .then((response) => {
-        // Once the request is resolved successfully and the product
-        // is updated we navigate back to the details page
         navigate(`/products/${productId}`);
       })
       .catch((error) => {
@@ -122,7 +116,7 @@ function EditProductPage(props) {
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
         </Row>
-        {errorMessage && <p className="error-message">Wrong credentials!</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             Update Product

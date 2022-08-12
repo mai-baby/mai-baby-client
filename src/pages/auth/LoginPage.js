@@ -53,7 +53,7 @@ function LoginPage(props) {
           onChange={handlePassword}
           placeholder="Password"
         />
-        {errorMessage && <p className="error-message">Wrong credentials!</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button id="login-button" type="submit">
           Login
         </button>

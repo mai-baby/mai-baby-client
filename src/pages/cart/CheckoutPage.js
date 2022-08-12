@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Row, Button, Form } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import { Row, Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { AuthContext } from "../../context/auth.context";
@@ -9,6 +9,11 @@ import { useContext } from "react";
 
 function CheckoutPage(props) {
   const { user } = useContext(AuthContext);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const { cartItems, totalPrice } = props;
 
@@ -20,8 +25,6 @@ function CheckoutPage(props) {
   const [country, setCountry] = useState("");
 
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  const navigate = useNavigate();
 
   const pushProducts = cartItems.map((item) => item._id);
 
@@ -35,7 +38,6 @@ function CheckoutPage(props) {
       address: { fullname, street, postal, city, state, country },
     };
 
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/checkout`, requestBody, {
@@ -43,7 +45,6 @@ function CheckoutPage(props) {
       })
       .then(() => {
         props.setCartItems([]);
-        navigate(`/confirmation`);
       })
       .catch((error) => {
         const errorDescription = error.response.data.errorMessage;
@@ -115,13 +116,43 @@ function CheckoutPage(props) {
             />
           </Form.Group>
         </Row>
-        {errorMessage && <p className="error-message">Wrong credentials!</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="text-center">
-          <Button type="submit" className="mt-3" variant="primary">
+          <Button
+            type="submit"
+            className="mt-3"
+            variant="primary"
+            onClick={handleShow}
+          >
             Order
           </Button>
         </div>
       </Form>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Thank you! Your order has been received! 🎉🎉
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          See your orders by clicking on the button or continue shopping!
+        </Modal.Body>
+        <Modal.Footer>
+          <Link to={"/products"}>
+            <Button variant="warning" onClick={handleClose}>
+              Products
+            </Button>
+          </Link>
+          <Link to={"/orders"}>
+            <Button variant="primary">My Orders</Button>
+          </Link>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

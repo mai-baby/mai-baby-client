@@ -118,7 +118,7 @@ function EditOrderPage(props) {
             />
           </Form.Group>
         </Row>
-        {errorMessage && <p className="error-message">Wrong credentials!</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             Change Details

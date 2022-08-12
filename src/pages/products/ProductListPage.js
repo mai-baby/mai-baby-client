@@ -1,12 +1,13 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
+import React, { useState, useEffect } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ProductListPage(props) {
@@ -14,8 +15,20 @@ function ProductListPage(props) {
 
   const { onAdd } = props;
 
+  const [show, setShow] = useState(true);
+
+  const handleClose = () => setShow(false);
+
+  const [message, setMessage] = useState(false);
+
   useEffect(() => {
     props.getAllProducts();
+
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("canceled")) {
+      setMessage(true);
+    }
   }, []);
 
   return (
@@ -78,6 +91,30 @@ function ProductListPage(props) {
           );
         })}
       </Row>
+      {message ? (
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Oops!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Something went wrong with your payment - please try again!
+          </Modal.Body>
+          <Modal.Footer>
+            <Link to={"/products"}>
+              <Button variant="warning" onClick={handleClose}>
+                Products
+              </Button>
+            </Link>
+          </Modal.Footer>
+        </Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

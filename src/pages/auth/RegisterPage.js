@@ -1,5 +1,3 @@
-// src/pages/RegisterPage.js
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,12 +16,8 @@ function RegisterPage(props) {
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    // Create an object representing the request body
     const requestBody = { email, password, username };
 
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/register`, requestBody)
       .then((response) => {
@@ -64,7 +58,6 @@ function RegisterPage(props) {
           onChange={handlePassword}
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {/* COMMENT conditional rendering with true or false and then show the spinner, put a spinner instead of button with ternary, true/false */}
         <button id="register-button" type="submit">
           Register
         </button>

@@ -13,11 +13,9 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
 import BasketPage from "./pages/cart/BasketPage";
 import CheckoutPage from "./pages/cart/CheckoutPage";
-import ConfirmationPage from "./pages/cart/ConfirmationPage";
 import OrdersPage from "./pages/cart/OrdersPage";
 import OrderDetailPage from "./pages/cart/OrderDetailPage";
 import EditOrderPage from "./pages/cart/EditOrderPage";
-import PaymentPage from "./pages/cart/PaymentPage";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
 import IsAdmin from "./components/auth/IsAdmin";
@@ -193,15 +191,6 @@ function App() {
         />
 
         <Route
-          path="/confirmation"
-          element={
-            <IsPrivate>
-              <ConfirmationPage />
-            </IsPrivate>
-          }
-        />
-
-        <Route
           path="/orders"
           element={
             <IsPrivate>
@@ -224,15 +213,6 @@ function App() {
           element={
             <IsPrivate>
               <EditOrderPage />
-            </IsPrivate>
-          }
-        />
-
-        <Route
-          path="/payment"
-          element={
-            <IsPrivate>
-              <PaymentPage />
             </IsPrivate>
           }
         />

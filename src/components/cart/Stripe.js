@@ -1,7 +1,6 @@
-import { Row, Col, Button, Form, Breadcrumb, Image } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 function Basket(props) {
   const { cartItems, setCartItems } = props;
@@ -25,8 +24,8 @@ function Basket(props) {
     let requestBody = {
       line_items: lineItems,
       mode: "payment",
-      success_url: `${window.location.origin}/payment?success=true`,
-      cancel_url: `${window.location.origin}/payment?canceled=true`,
+      success_url: `${window.location.origin}/checkout`,
+      cancel_url: `${window.location.origin}/products?canceled=true`,
     };
 
     const storedToken = localStorage.getItem("authToken");
@@ -43,7 +42,6 @@ function Basket(props) {
         }
       )
       .then((resultJSON) => {
-        setCartItems([]);
         window.location.href = resultJSON.data.url;
       })
       .catch((error) => {

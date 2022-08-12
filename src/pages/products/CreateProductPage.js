@@ -18,7 +18,6 @@ function CreateProductPage(props) {
     e.preventDefault();
     const requestBody = { title, shortDescription, price, brand, imageURL };
 
-    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
     axios
@@ -94,7 +93,7 @@ function CreateProductPage(props) {
             {/* <Form.Text>Don't share your password!</Form.Text> */}
           </Form.Group>
         </Row>
-        {errorMessage && <p className="error-message">Wrong credentials!</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="text-center">
           <Button type="submit" className="mt-3" variant="primary">
             List Product
