@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
 function Basket(props) {
-  const { cartItems, setCartItems } = props;
+  const { cartItems } = props;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
